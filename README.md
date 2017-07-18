@@ -416,7 +416,6 @@ Content-Type: application/json;charset=UTF-8
   * `imageContent`: 단수 이미지로 구성된 메시지
   * `compositeContent`: 텍스트와 이미지 그리고 버튼을 포함하는 복합 메시지
 <br>
-<br>
 
 #### send 이벤트 구조
 ```javascript
