@@ -4,7 +4,6 @@
 * **프로필 API 명세**
 * **네이버페이 API 명세**
 <br>
-<br>
 
 ## 차례
 * [챗봇용 파트너 계정 생성](#챗봇용-파트너-계정-생성)
@@ -27,7 +26,6 @@
   * [기존 `user` 식별값과 최신 `user` 식별값 변환방법](#기존-user-식별값과-최신-user-식별값-변환방법)
 <br>
 <br>
-<br>
 
 
 ## 챗봇용 파트너 계정 생성
@@ -42,8 +40,6 @@
 9. 좌측 메뉴 `기본설정` 하위 `챗봇 API` 메뉴를 통해 이용약관동의 및 챗봇설정
 <br>
 <br>
-<br>
-
 
 ## `Webhook` 작성 방법
 <br>
@@ -58,7 +54,6 @@
 * 네이버톡톡에서 `Webhook` 호출시 설정값
   * Connection timed out : `3초`
   * Read timed out : `5초`
-<br>
 <br>
 
 ### **[STEP 1]** 네이버톡톡으로부터 이벤트 받기
@@ -110,11 +105,9 @@ curl -X POST -H "Content-Type: application/json" -d '{ "event": "test" }' "http:
 ```
 * localhost에서 테스트 후 정식 인증서를 사용하여 https://your.domain/ 으로 접근이 가능 해야합니다.
 <br>
-<br>
 
 #### 3. URL를 등록한다.
 * `파트너센터` > `기본설정` > `챗봇 API` 메뉴에서 `Webhook` 영역 `이벤트 받을 URL`에 위에서 만든 URL를 등록합니다.
-<br>
 <br>
 
 #### 4. 연동이 완료되어 톡톡으로부터 이벤트를 받는다.
@@ -237,7 +230,6 @@ app.listen(8080);
 * request log를 보면서 어떤 이벤트가 발생되고, 어떻게 대응할지 고민해본다.
 <br>
 <br>
-<br>
 
 ## API 연동을 위한 `보내기 API`
 * 보통 단순한 챗봇들은 `Webhook`만으로도 구현이 가능합니다.
@@ -265,12 +257,12 @@ HTTP/1.1 200 OK
 ```
 <br>
 <br>
-<br>
 
 ## 이벤트 명세서
 
 ### 이벤트 기본 구조
 <br>
+
 [Request 메시지 구조]
 ```javascript
 POST / HTTP/1.1
@@ -285,6 +277,7 @@ Accept: application/json
     "user": "al-2eGuGr5WQOnco1_V-FQ" /* 유저 식별값 */
 }
 ```
+
 * `event`에는 다양한 이벤트를 식별할 수 있는 `이벤트명`이 들어온다.
 * 특정 이벤트만으로 설명될 수 없는 추가적인 속성은 `options`를 통해 정보를 얻을 수 있다.
 * 톡톡에서 1:1대화란 `파트너(partner)`와 `유저(user)`와의 대화이다.
