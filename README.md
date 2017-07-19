@@ -671,7 +671,6 @@ Content-Type: application/json;charset=UTF-8
 > * `버튼`은 `TEXT`와 `LINK` 타입만 허용되며, `title` 길이는 4자로 제한된다.
 
 #### Button object
-
 ```javascript
 {
     "type": "버튼타입",
@@ -706,7 +705,6 @@ Content-Type: application/json;charset=UTF-8
 > * `code`의 최대 길이는 1000자이다.
 
 #### ButtonData object (`LINK` 타입)
-
 ```javascript
 {
     "type": "LINK",
@@ -723,14 +721,9 @@ Content-Type: application/json;charset=UTF-8
 | `title` | string | Y | `버튼`에 노출되는 텍스트 |
 | `url` | string | Y | PC버전 채팅창에서 `버튼`을 클릭하면 이동할 페이지 URL |
 | `mobileUrl` | string | Y | 모바일 버전 채팅창에서 `버튼`을 클릭하면 이동할 페이지 URL |
-| `target` | string | N | 모바일 채팅창에서 `버튼`을 클릭했을 때 페이지를 여는 방식. `blank`와 `self`이 있다.. 기본값은 `blank` |
-| `pcTarget` | string | N | PC 채팅창에서 `버튼`을 클릭했을 때 페이지를 여는 방식. `blank`, `self`, `popup`이 있다. 기본값은 `blank` |
-| `pcPopupSpecs` | string | N | PC 채팅창에서 팝업을 열 때 사용하는 파라미터 |
 > **[주의사항]**<br>
 > * `title`의 최대 길이는 18자이다.
 > * `blank`은 자창. `self`는 새창. `popup`은 팝업으로 링크를 연다.
-> * `pcPopupSpecs`는 [MDN Window.open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)에 기술된 3번째 파라미터 명세서를 따른다.
->   * 이 중 width, height, resizable, status, titlebar, toolbar, menubar, scrollbars 속성만 허용한다.
 
 #### ButtonData object (`OPTION` 타입)
 ```javascript
@@ -797,11 +790,11 @@ Content-Type: application/json;charset=UTF-8
 >   - `pcPopupSpecs`는 [MDN Window.open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)에 기술된 3번째 파라미터 명세서를 따른다.
 <br>
 
-> **[자창 사용시 가이드]**<br>
-> `target`와 `pcTarget`에 `self`로 설정하면 자창으로 페이지이동이 된다. 쉽게 말하면 `톡톡 채팅창`에서 `외부 웹페이지`로 이동하게 되는것이다.
-> 이때 중요한 `주의사항`이 있다. `외부 웹페이지`에서 `톡톡 채팅창`으로 돌아올때 페이지이동을 사용하지 말고 꼭! `history.back()`으로 돌아와야한다.
-> - `외부 웹페이지`에서 `톡톡 채팅창`으로 페이지 이동하게 되면 `톡톡 채팅창`에서 `history.back()`를 누르게 되면 `채팅 리스트`로 가는것이 아니라 `외부 웹페이지`로 다시 돌아가게 된다.
-> - 보통 `톡톡 채팅창`의 버튼을 통해 이전페이지를 간다면 충분히 핸들링이 가능하지만, 안드로이드의 물리적 버튼을 통해 `history.back()`하는 경우 `채팅 리스트`로 안내할 수 없다.
+> **[LINK 타입 버튼 사용시 가이드]**<br>
+> 모바일 채팅창에서는 `LINK` 타입 버튼을 클릭하면 현재 창에서 링크를 연다. `톡톡 채팅창`에서 `외부 웹페이지`로 이동하게 되는것이다.
+> 이때 중요한 `주의사항`이 있다. `외부 웹페이지`에서 `톡톡 채팅창`으로 돌아올때 **페이지 이동**을 사용하지 말고 꼭! **`history.back()`**으로 돌아와야한다.
+> - `외부 웹페이지`에서 `톡톡 채팅창`으로 **페이지 이동**하게 되면 `톡톡 채팅창`에서 `history.back()`를 누르게 되면 `채팅 리스트`로 가는것이 아니라 `외부 웹페이지`로 다시 돌아가게 된다.
+> - 보통 `톡톡 채팅창`의 버튼을 통해 이전 페이지를 간다면 충분히 핸들링이 가능하지만, 안드로이드의 물리적 버튼을 통해 `history.back()`하는 경우 `채팅 리스트`로 안내할 수 없다.
 > - `외부 웹페이지`에서 `history.back()`으로 `톡톡 채팅창`에 돌아오기 위해서는 `외부 웹페이지`는 여러페이지로 이동할 수 없고 SPA (single-page application) 방식으로 만들어져야 한다. 그렇지 않으면 여러페이지로 만들어지되 `외부 웹페이지`도 철저히 `history.back()`으로만 원점으로 돌아오도록 유도해야한다.
 <br>
 
