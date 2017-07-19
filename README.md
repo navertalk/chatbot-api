@@ -724,7 +724,7 @@ Content-Type: application/json;charset=UTF-8
 > **[주의사항]**<br>
 > * `title`의 최대 길이는 18자이다.
 > * 모바일 채팅창에서는 `현재 창`에서 링크를 열고 PC에서는 `새 창`으로 링크를 연다.
-> * 모바일에서 `현재 창`으로 이동한 페이지에서 다시 돌아올 때는 반드시 `뒤로가기` `history.back()`을 이용한다.
+> * 모바일에서 `현재 창`으로 이동한 페이지에서 다시 채팅창으로 돌아올 때는 반드시 `뒤로가기` `history.back()`을 이용한다.
 
 #### ButtonData object (`OPTION` 타입)
 ```javascript
@@ -777,7 +777,7 @@ Content-Type: application/json;charset=UTF-8
 > - `title`, `description`, `elementList` 중 적어도 한개의 속성은 존재해야 한다.
 > - `title`, `description`, `elementList`, `image`, `buttonList` 중 적어도 두개의 속성이 존재해야 한다.
 > `image`는 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일하다.<br>
-> `buttonList`에 `button`의 타입은 `TEXT`, `LINK`, `OPTION`이 있다.
+> `buttonList`에 `button`의 타입은 `TEXT`, `LINK`, `OPTION`, `PAY`이 있다.
 > - `TEXT`타입을 사용할때 `유저`가 버튼을 클릭하게되면 버튼에 노출되었던 `text`의 내용이 `유저`가 보낸 메시지처럼 채팅창에 말풍선 생성되고 봇으로 `send`이벤트가 전달된다.
 >   - 보통 `text`의 텍스트를 분석하면 `유저`가 어떤 버튼를 눌렀는지 파악할 수 있고 다음 프로세스를 진행할 수 있다.
 >   - 그러나 `text`를 분석하기 어렵다면 또는 봇이 `Stateful`이라서 상태를 관리할 수 없다면 `code`를 활용할 수 있다.
@@ -815,8 +815,10 @@ Content-Type: application/json;charset=UTF-8
 ### 퀵버튼
 <img src="btn_quick.jpg">
 
-* `compositeContent`의 `OPTION`타입 버튼과 유사한 기능을 `textContent`와 `imageContent`에도 지원합니다. 
-* 메시지를 전송하면 채팅창 하단에 버튼이 나열됩니다.
+* `compositeContent`의 `OPTION`타입 버튼과 유사한 기능을 `textContent`와 `imageContent`에도 지원한다. 
+* 메시지를 전송하면 채팅창 하단에 `버튼`이 나열된다.
+* `TEXT`, `LINK`, `OPTION`, `PAY` 모든 타입의 버튼이 허용된다.
+* 버튼 `title`의 글자 수는 10자로 제한된다.
 
 #### textContent에 퀵버튼 적용
 ```javascript
@@ -830,7 +832,7 @@ Content-Type: application/json;charset=UTF-8
         "quickReply" : { /* 퀵버튼 - 빠른응답 */
             "buttonList" : [ /* 버튼 리스트 */
                 {
-                    "type" : "TEXT", /* 모든 타입의 버튼이 사용 가능합니다. */
+                    "type" : "TEXT", /* 모든 타입의 버튼이 허용된다. */
                     "data" : {
                         /* 버튼 데이터 */
                     }
@@ -852,7 +854,7 @@ Content-Type: application/json;charset=UTF-8
         "quickReply" : { /* 퀵버튼 - 빠른응답 */
             "buttonList" : [ /* 버튼 리스트 */
                 {
-                    "type" : "TEXT", /* 모든 타입의 버튼이 사용 가능합니다. */
+                    "type" : "TEXT",
                     "data" : {
                         /* 버튼 데이터 */
                     }
@@ -871,12 +873,12 @@ Content-Type: application/json;charset=UTF-8
     
     "compositeContent": {
         "compositeList": [
-            /* composite 리스트 */
+            /* composite 데이터 */
         ],
-        "quickReply" : { /* 퀵버튼 - 빠른응답 */
-            "buttonList" : [ /* 버튼 리스트 */
+        "quickReply" : {
+            "buttonList" : [
                 {
-                    "type" : "TEXT", /* 모든 타입의 버튼이 사용 가능합니다. */
+                    "type" : "TEXT",
                     "data" : {
                         /* 버튼 데이터 */
                     }
