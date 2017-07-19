@@ -450,7 +450,7 @@ Content-Type: application/json;charset=UTF-8
 
 ## 메시지 데이터 명세
 ### textContent
-```json
+```javascript
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -473,7 +473,7 @@ Content-Type: application/json;charset=UTF-8
 <br>
 
 ### imageContent
-```json
+```javascript
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -522,7 +522,7 @@ Content-Type: application/json;charset=UTF-8
 * `구성요소`의 노출 순서는 변경할 수 없다.
 
 [모든 `구성요소`를 포함한 사용 예]
-```json
+```javascript
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -671,7 +671,8 @@ Content-Type: application/json;charset=UTF-8
 > * `버튼`은 `TEXT`와 `LINK` 타입만 허용되며, `title` 길이는 4자로 제한된다.
 
 #### Button object
-```json
+
+```javascript
 {
     "type": "버튼타입",
     "data": {
@@ -686,7 +687,7 @@ Content-Type: application/json;charset=UTF-8
 | `data` | ButtonData | Y | `버튼` 요소의 데이터 |
 
 #### ButtonData object (`TEXT` 타입)
-```json
+```javascript
 {
     "type": "TEXT",
     "data": {
@@ -705,7 +706,8 @@ Content-Type: application/json;charset=UTF-8
 > * `code`의 최대 길이는 1000자이다.
 
 #### ButtonData object (`LINK` 타입)
-```json
+
+```javascript
 {
     "type": "LINK",
     "data": {
@@ -731,7 +733,7 @@ Content-Type: application/json;charset=UTF-8
 >   * 이 중 width, height, resizable, status, titlebar, toolbar, menubar, scrollbars 속성만 허용한다.
 
 #### ButtonData object (`OPTION` 타입)
-```json
+```javascript
 {
     "type": "OPTION",
     "data": {
@@ -759,7 +761,7 @@ Content-Type: application/json;charset=UTF-8
 > * `buttonList`의 `버튼`에는 `TEXT`, `LINK`, `PAY` 타입만 허용된다. `title`은 10자로 제한된다.
 
 #### ButtonData object (`PAY` 타입)
-```json
+```javascript
 {
     "type": "PAY",
     "data": {
@@ -823,7 +825,7 @@ Content-Type: application/json;charset=UTF-8
 * 메시지를 전송하면 채팅창 하단에 버튼이 나열됩니다.
 
 #### textContent에 퀵버튼 적용
-```json
+```javascript
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -846,7 +848,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 #### imageContent에 퀵버튼 적용
-```json
+```javascript
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -868,7 +870,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 #### compositeContent에 퀵버튼 적용
-```json
+```javascript
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
