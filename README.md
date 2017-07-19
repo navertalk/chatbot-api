@@ -358,15 +358,15 @@ Content-Type: application/json;charset=UTF-8
 ```
 
 > **[사용팁]**<br>
-봇이 유저와 대화를 나눌때 유입경로는 많은 정보를 제공해 줄 수 있다.<br>
-쇼핑몰이라면 `http://shopping.com/product/1234` 로부터 유입된경우 `1234 상품구매를 원하시나요?`라고 유저의 의도를 먼저파악해 대응이 가능하다.<br>
-경우에따라 하나의 `Web Page`에 여러개의 상품과 함께 버튼 또는 링크를 노출하였다면 `referer`만으로는 이들을 구분해 줄 수 없다.<br>
-그럴땐 `http://talk.naver.com/wc1234?from=1234`와 `http://talk.naver.com/wc1234?from=5678`처럼 파라미터를 이용하여, `from`으로 파라미터값을 받아낼 수 있다.<br>
-톡톡은 Web 서비스이기때문에 외부의 어떤 `Web Page`이든 버튼 또는 링크를 통해 봇과 대화를 시작할 수 있다.<br>
-여러 서비스를 통해 배너광고를 하는경우 어떤 배너로 유입이 많은지 그래서 어떤 배너에 집중할지 통계데이터로도 활용할 수 있다.<br>
-`"inflow": "list"`의 경우 톡톡 채팅리스트를 통한 유입인데 단지 과거 대화이력을 보기위해 `open`했는지 알수없기때문에 메시지 마지막발생시간 또는 문맥에 따라 대응한다.<br>
-`"inflow": "none"`의 경우에도 메시지 마지막발생시간 또는 문맥에 따라 대응한다.<br>
-`"under14": false`는 `open`이벤트에 반드시 포함되는 `options`의 하위 속성이다. 개인정보수집을 위한 약관동의시 만14세미만(`true`)의 경우 `법정대리인`의 동의를 받아야한다.(`개인정보보호법 제22조`) 챗봇이 개인정보를 수집한다면, `법정대리인` 동의 프로세스를 구현하거나 만14세미만 사용을 못하도록 안내하여야 한다.
+> 봇이 유저와 대화를 나눌때 유입경로는 많은 정보를 제공해 줄 수 있다.<br>
+> 쇼핑몰이라면 `http://shopping.com/product/1234` 로부터 유입된경우 `1234 상품구매를 원하시나요?`라고 유저의 의도를 먼저파악해 대응이 가능하다.<br>
+> 경우에따라 하나의 `Web Page`에 여러개의 상품과 함께 버튼 또는 링크를 노출하였다면 `referer`만으로는 이들을 구분해 줄 수 없다.<br>
+> 그럴땐 `http://talk.naver.com/wc1234?from=1234`와 `http://talk.naver.com/wc1234?from=5678`처럼 파라미터를 이용하여, `from`으로 파라미터값을 받아낼 수 있다.<br>
+> 톡톡은 Web 서비스이기때문에 외부의 어떤 `Web Page`이든 버튼 또는 링크를 통해 봇과 대화를 시작할 수 있다.<br>
+> 여러 서비스를 통해 배너광고를 하는경우 어떤 배너로 유입이 많은지 그래서 어떤 배너에 집중할지 통계데이터로도 활용할 수 있다.<br>
+> `"inflow": "list"`의 경우 톡톡 채팅리스트를 통한 유입인데 단지 과거 대화이력을 보기위해 `open`했는지 알수없기때문에 메시지 마지막발생시간 또는 문맥에 따라 대응한다.<br>
+> `"inflow": "none"`의 경우에도 메시지 마지막발생시간 또는 문맥에 따라 대응한다.<br>
+> `"under14": false`는 `open`이벤트에 반드시 포함되는 `options`의 하위 속성이다. 개인정보수집을 위한 약관동의시 만14세미만(`true`)의 경우 `법정대리인`의 동의를 받아야한다.(`개인정보보호법 제22조`) 챗봇이 개인정보를 수집한다면, `법정대리인` 동의 프로세스를 구현하거나 만14세미만 사용을 못하도록 안내하여야 한다.
 
 <br>
 <br>
@@ -380,10 +380,10 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 > **[사용팁]**<br>
-`leave` 이벤트의 `Response`에 `request`를 넣어도 메시지가 전송되지않고 항상 무시된다.<br>
-`leave` 이벤트는 일반 메신저를 사용하듯 `채팅창`을 나간것으로 `채팅리스트`에는 존재하지 않지만, 봇이 유저에게 다시 메시지를 보낸다면 다시 소환된다.<br>
-`leave` 이벤트를 통해 봇이 유저에게 적극적으로 추후 메시지를 보낼것이냐? 아니면 이쯤에서 더 이상 대화를 하지 않을것인가를 선택하면 된다.<br>
-유저가 `채팅창`을 나갔다고해서 반드시 봇과 대화를 원하지않는것은 아니다.
+> `leave` 이벤트의 `Response`에 `request`를 넣어도 메시지가 전송되지않고 항상 무시된다.<br>
+> `leave` 이벤트는 일반 메신저를 사용하듯 `채팅창`을 나간것으로 `채팅리스트`에는 존재하지 않지만, 봇이 유저에게 다시 메시지를 보낸다면 다시 소환된다.<br>
+> `leave` 이벤트를 통해 봇이 유저에게 적극적으로 추후 메시지를 보낼것이냐? 아니면 이쯤에서 더 이상 대화를 하지 않을것인가를 선택하면 된다.<br>
+> 유저가 `채팅창`을 나갔다고해서 반드시 봇과 대화를 원하지않는것은 아니다.
 
 <br>
 <br>
@@ -401,10 +401,10 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 > **[사용팁]**<br>
-`friend` 이벤트에는 무반응으로 응답하는것이 좋다.<br>
-필요하다면 봇에서 유저의 친구여부를 저장하는정도로 사용하자.<br>
-톡톡에서 친구란 [파트너센터](https://partner.talk.naver.com/)의 `마케팅관리` > `단체메시지`를 이용해 메시지를 보낼 수 있는 대상자이다.<br>
-`친구추가`에 대한 감사메시지를 봇에서 보내는것보다 `파트너센터`의 `친추감사메시지`를 설정하여 다양한 메시지를 보내자.<br>
+> `friend` 이벤트에는 무반응으로 응답하는것이 좋다.<br>
+> 필요하다면 봇에서 유저의 친구여부를 저장하는정도로 사용하자.<br>
+> 톡톡에서 친구란 [파트너센터](https://partner.talk.naver.com/)의 `마케팅관리` > `단체메시지`를 이용해 메시지를 보낼 수 있는 대상자이다.<br>
+> `친구추가`에 대한 감사메시지를 봇에서 보내는것보다 `파트너센터`의 `친추감사메시지`를 설정하여 다양한 메시지를 보내자.<br>
 <br>
 <br>
 
@@ -433,24 +433,24 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 > **[주의사항]**<br>
-`send` 이벤트는 **(1)톡톡에서 봇으로 이벤트를 전송할때,** **(2) `1번`의 응답으로 `request`영역에 즉시 이벤트를 전송할때,** **(3)봇에서 특정사건에의해 이벤트를 톡톡으로 전송할때** 사용될 수 있다.<br>
-`send` 이벤트에는 `textContent`, `imageContent`, `compositeContent` 중 하나만 선택하여 전송해야한다.<br>
-`options`의 `notification`는 push를 보내야하는지 여부를 나타낸다.<br>
-  - `notification`는 `send`이벤트를 보내는 방법중 `3번`에서만 사용할 수 있다.
-  - `notification`는 `default`값이 `false`이다. push를 보내지않는경우는 `options`영역을 채울 필요가 없다.
-  - `notification`를 `true`로 전송하더라도 `유저`가 채팅창에 들어와있으면 메시지를 실시간으로 받을 수 있기 때문에 push가 보내지지 않는다.
-  - push가 보내지면 메시지와함께 `네이버me`의 `알림`에 알림이 전송되고, 모바일기기에 설치된 `네이버앱`에 push가 전달된다.
-  - 위의 내용만으로는 `notification`를 항상 `true`로 보내는것이 좋을것같다. 그러나 몇몇상황에서 `notification`는 부작용을 일으킬 수 있다.
-  - (1) `유저`가 톡톡 채팅창에서 봇과 채팅중 봇이 제공하는 외부링크로 페이지를 전환하였다면 톡톡페이지를 이미 벗어났기때문에 push를 받게된다. 그러나 `유저`의 경험은 아직 봇과 대화중에 있는것으로 알고있다. 예를 들어 별도페이지에서 주소를 입력하고 있다가 push를 받을 수 있다.
-  - (2) `유저`가 채팅창에 있다고 판단하는 근거는 `Web Socket`으로 서버와 연결되어있을때다. 그러나 빠른 페이지 렌더링을 위해 `Web Socket`는 `Lazy-Connection`를 하기때문에 `open`이벤트와 동시에 `notification` `true`로 전송하게되면 `유저`가 채팅창에서 push를 받을 수 있다.
-  - 위와같은 이유로 `default(false)` 사용을 추천한다. `유저`의 요청에 봇은 실시간으로 응답하기 때문에 `유저`가 채팅창을 떠난상태에서 답변이 전송되는 경우가 드물다.
-  - 그러나 `(1)`, `(2)`에 해당하지 않으면서 `배송출발` 또는 `예약완료`처럼 특정사건에의해 봇이 이벤트를 보내야한다면 `notification` 사용을 권장한다.
+> `send` 이벤트는 **(1)톡톡에서 봇으로 이벤트를 전송할때,** **(2) `1번`의 응답으로 `request`영역에 즉시 이벤트를 전송할때,** **(3)봇에서 특정사건에의해 이벤트를 톡톡으로 전송할때** 사용될 수 있다.<br>
+> `send` 이벤트에는 `textContent`, `imageContent`, `compositeContent` 중 하나만 선택하여 전송해야한다.<br>
+> `options`의 `notification`는 push를 보내야하는지 여부를 나타낸다.<br>
+>   - `notification`는 `send`이벤트를 보내는 방법중 `3번`에서만 사용할 수 있다.
+>   - `notification`는 `default`값이 `false`이다. push를 보내지않는경우는 `options`영역을 채울 필요가 없다.
+>   - `notification`를 `true`로 전송하더라도 `유저`가 채팅창에 들어와있으면 메시지를 실시간으로 받을 수 있기 때문에 push가 보내지지 않는다.
+>   - push가 보내지면 메시지와함께 `네이버me`의 `알림`에 알림이 전송되고, 모바일기기에 설치된 `네이버앱`에 push가 전달된다.
+>   - 위의 내용만으로는 `notification`를 항상 `true`로 보내는것이 좋을것같다. 그러나 몇몇상황에서 `notification`는 부작용을 일으킬 수 있다.
+>   - (1) `유저`가 톡톡 채팅창에서 봇과 채팅중 봇이 제공하는 외부링크로 페이지를 전환하였다면 톡톡페이지를 이미 벗어났기때문에 push를 받게된다. 그러나 `유저`의 경험은 아직 봇과 대화중에 있는것으로 알고있다. 예를 들어 별도페이지에서 주소를 입력하고 있다가 push를 받을 수 있다.
+>   - (2) `유저`가 채팅창에 있다고 판단하는 근거는 `Web Socket`으로 서버와 연결되어있을때다. 그러나 빠른 페이지 렌더링을 위해 `Web Socket`는 `Lazy-Connection`를 하기때문에 `open`이벤트와 동시에 `notification` `true`로 전송하게되면 `유저`가 채팅창에서 push를 받을 수 있다.
+>   - 위와같은 이유로 `default(false)` 사용을 추천한다. `유저`의 요청에 봇은 실시간으로 응답하기 때문에 `유저`가 채팅창을 떠난상태에서 답변이 전송되는 경우가 드물다.
+>   - 그러나 `(1)`, `(2)`에 해당하지 않으면서 `배송출발` 또는 `예약완료`처럼 특정사건에의해 봇이 이벤트를 보내야한다면 `notification` 사용을 권장한다.
 
 <br>
 
 ## 메시지 데이터 명세
 ### textContent
-```javascript
+```json
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -462,18 +462,18 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 > **[사용팁]**<br>
-`text`에 전송하고자하는 텍스트를 기입한다.
-- 줄바꿈이 필요할때 `\n`를 삽입한다.
-- 텍스트에 `010-1234-1234` 또는 `01012341234`처럼 전화번호가 들어가면 채팅창에 노출될때 자동으로 `telto:`가 삽입되어 모바일기기는 `전화걸기`로 넘어갈 수 있도록 해준다.
-- 텍스트에 `http://talk.naver.com/`처럼 URL이 삽입된경우 자동으로 Anchor Tag(`<a>`)로 변환하여 노출해준다.
-- 텍스트의 최대길이는 영문/한글 구분없이 1만자이내로 전송해야한다.
-`code`는 `compositeContent`에 내장된 버튼클릭시 어떤 버튼을 눌렀는지 확인하는 용도로 활용될 수 있다.
-- `compositeContent` 전송시 두개의 버튼에 각각 `A`와 `B`코드를 넣었다면, 유저가 버튼클릭시 `code`값을 확인하여 어떤 버튼을 눌렀는지 확인할 수 있다.
+> `text`에 전송하고자하는 텍스트를 기입한다.
+> - 줄바꿈이 필요할때 `\n`를 삽입한다.
+> - 텍스트에 `010-1234-1234` 또는 `01012341234`처럼 전화번호가 들어가면 채팅창에 노출될때 자동으로 `telto:`가 삽입되어 모바일기기는 `전화걸기`로 넘어갈 수 있도록 해준다.
+> - 텍스트에 `http://talk.naver.com/`처럼 URL이 삽입된경우 자동으로 Anchor Tag(`<a>`)로 변환하여 노출해준다.
+> - 텍스트의 최대길이는 영문/한글 구분없이 1만자이내로 전송해야한다.
+> `code`는 `compositeContent`에 내장된 버튼클릭시 어떤 버튼을 눌렀는지 확인하는 용도로 활용될 수 있다.
+> - `compositeContent` 전송시 두개의 버튼에 각각 `A`와 `B`코드를 넣었다면, 유저가 버튼클릭시 `code`값을 확인하여 어떤 버튼을 눌렀는지 확인할 수 있다.
 
 <br>
 
 ### imageContent
-```javascript
+```json
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -484,23 +484,23 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 > **[사용팁]**<br>
-**`imageUrl`에 전송하고자하는 이미지 URL를 넣는다.**
-- `imageUrl`는 외부에서 접근가능한 URL이여야한다. 사내에서만 접근가능한 URL일경우 `톡톡서버`에서 접근할 수 없으므로 해당 `imageContent`를 전송할 수 없다.
-  - **`톡톡서버`에서 URL에 접근해 다운받으려고 할 때 `HTTP` 응답 헤더의 `Content-Type` 개체의 값은 반드시 해당 이미지 유형과 일치해야 한다.**
-- `imageContent`를 톡톡에 전달하게 되면 (1)`톡톡서버`는 해당 URL로 1회접근하여 이미지를 다운로드 받는다. (2) 다운로드받은 이미지는 톡톡에 보관되고 톡톡용 이미지URL로 `유저`에게 이미지를 노출한다.
-- `imageContent`를 톡톡에 전달하고 `Response`를 성공적으로 받았다면, 위에 설명한 (1)이 완료되었다는것으로 더 이상 `imageUrl`로 접근되지 않으므로 접근거부나 삭제처리해도 무방하다.
-- `imageUrl`에 사용될 수 있는 이미지에 대한 제약은 아래와 같다.
-  - 이미지는 최대 20MB 용량까지 가능하다.
-  - 이미지 포맷은 JPG, JPEG, PNG, GIF 가능하다.
-  - PNG, GIF의 경우 `바탕투명` 또는 `움직이는이미지` 모두 채팅창으로 표현이 가능하다.
-- **[중요팁]** 성능향상을 위한 고려사항
-  - 똑같은 이미지를 톡톡에 방문하는 `유저`마다 보여준다고 한다면, `imageContent`를 전송할때마다 `톡톡서버`에서 다운로드하는 방식으로는 매우 비효율적이고 속도또한 빠르지 않다.
-  - 그렇다고 `imageContent`의 `imageUrl`이 동일할 경우 톡톡자체적으로 `cache`하는것은 위험하다. 항상 URL이 같다고 이미지가 같은것은 아니기 때문이다.
-  - 봇에서 매번 변경되는 이미지가 아니라 자주 사용되는 이미지라면 `톡톡`에 이미지를 먼저등록 후 톡톡이미지 URL를 사용할 수 있다.
-  - 톡톡은 `imageContent`에 대해서 `imageUrl`이 톡톡에서 사용하는 `http://shop1.phinf.naver.net/` 도메인일경우 이미지 다운로드없이 즉각 `유저`에게 전달된다.
-  - 봇에서 이미지를 `http://shop1.phinf.naver.net/`에 등록하는 방법은 `파트너센터`>`상담관리`>`상담파일관리`를 통해 이미지를 업로드 후 업로드된 이미지 URL를 참조하여 `imageUrl`에 삽입할 수 있다.
-  - (예) `상담파일관리`를 통해 업로드된 이미지가 `/shop1.phinf.naver.net/20150730_242/pqbdo_1438241499470AWJ9f_JPEG/IMG_20150726_100913.jpg?type=m120` 이라면, `http://shop1.phinf.naver.net/20150730_242/pqbdo_1438241499470AWJ9f_JPEG/IMG_20150726_100913.jpg`로 변경하여 전달하면 된다. `http:/`를 붙여준것과 `?type=m120`파라미터를 제거한것에 유의하자.
-- 톡톡이 봇에 `send`이벤트와 함께 `imageContent`를 보냈다면, `유저`가 봇에 이미지를 보낸 경우이다. 톡톡의 이미지 URL은 영구보관이므로 갑자기 접근할 수 없는 URL이 되는경우는 없다. `Image Processing`를 위해 다운로드를 받든 다운로드없이 톡톡 이미지 URL를 사용하든 봇에서 선택하면 된다.<br>
+> **`imageUrl`에 전송하고자하는 이미지 URL를 넣는다.**
+> - `imageUrl`는 외부에서 접근가능한 URL이여야한다. 사내에서만 접근가능한 URL일경우 `톡톡서버`에서 접근할 수 없으므로 해당 `imageContent`를 전송할 수 없다.
+>   - **`톡톡서버`에서 URL에 접근해 다운받으려고 할 때 `HTTP` 응답 헤더의 `Content-Type` 개체의 값은 반드시 해당 이미지 유형과 일치해야 한다.**
+> - `imageContent`를 톡톡에 전달하게 되면 (1)`톡톡서버`는 해당 URL로 1회접근하여 이미지를 다운로드 받는다. (2) 다운로드받은 이미지는 톡톡에 보관되고 톡톡용 이미지URL로 `유저`에게 이미지를 노출한다.
+> - `imageContent`를 톡톡에 전달하고 `Response`를 성공적으로 받았다면, 위에 설명한 (1)이 완료되었다는것으로 더 이상 `imageUrl`로 접근되지 않으므로 접근거부나 삭제처리해도 무방하다.
+> - `imageUrl`에 사용될 수 있는 이미지에 대한 제약은 아래와 같다.
+>   - 이미지는 최대 20MB 용량까지 가능하다.
+>   - 이미지 포맷은 JPG, JPEG, PNG, GIF 가능하다.
+>   - PNG, GIF의 경우 `바탕투명` 또는 `움직이는이미지` 모두 채팅창으로 표현이 가능하다.
+> - **[중요팁]** 성능향상을 위한 고려사항
+>   - 똑같은 이미지를 톡톡에 방문하는 `유저`마다 보여준다고 한다면, `imageContent`를 전송할때마다 `톡톡서버`에서 다운로드하는 방식으로는 매우 비효율적이고 속도또한 빠르지 않다.
+>   - 그렇다고 `imageContent`의 `imageUrl`이 동일할 경우 톡톡자체적으로 `cache`하는것은 위험하다. 항상 URL이 같다고 이미지가 같은것은 아니기 때문이다.
+>   - 봇에서 매번 변경되는 이미지가 아니라 자주 사용되는 이미지라면 `톡톡`에 이미지를 먼저등록 후 톡톡이미지 URL를 사용할 수 있다.
+>   - 톡톡은 `imageContent`에 대해서 `imageUrl`이 톡톡에서 사용하는 `http://shop1.phinf.naver.net/` 도메인일경우 이미지 다운로드없이 즉각 `유저`에게 전달된다.
+>   - 봇에서 이미지를 `http://shop1.phinf.naver.net/`에 등록하는 방법은 `파트너센터`>`상담관리`>`상담파일관리`를 통해 이미지를 업로드 후 업로드된 이미지 URL를 참조하여 `imageUrl`에 삽입할 수 있다.
+>   - (예) `상담파일관리`를 통해 업로드된 이미지가 `/shop1.phinf.naver.net/20150730_242/pqbdo_1438241499470AWJ9f_JPEG/IMG_20150726_100913.jpg?type=m120` 이라면, `http://shop1.phinf.naver.net/20150730_242/pqbdo_1438241499470AWJ9f_JPEG/IMG_20150726_100913.jpg`로 변경하여 전달하면 된다. `http:/`를 붙여준것과 `?type=m120`파라미터를 제거한것에 유의하자.
+> - 톡톡이 봇에 `send`이벤트와 함께 `imageContent`를 보냈다면, `유저`가 봇에 이미지를 보낸 경우이다. 톡톡의 이미지 URL은 영구보관이므로 갑자기 접근할 수 없는 URL이 되는경우는 없다. `Image Processing`를 위해 다운로드를 받든 다운로드없이 톡톡 이미지 URL를 사용하든 봇에서 선택하면 된다.<br>
 
 > `imageContent`를 톡톡으로 전송할때 문제가 발생되었다면 이미지처리에대한 `imageContent Error 코드표`을 참조한다.
 
@@ -509,13 +509,12 @@ Content-Type: application/json;charset=UTF-8
 
 ### compositeContent
 
-<br>
-<img src="compositeContent_02.png" />
-<br>
+<img src="composite_message.jpg" />
+
 * `compositeContent` 는 여러 형태의 `구성요소`를 복합적으로 사용할 수 있는 메시지이다.
 * 하나의 `composite`은 아래의 `구성요소`를 포함할 수 있다.
-  * `image`: 한 개의 이미지를 노출하는 `이미지` 요소
-  * `elementList`: 타이틀+설명1+설명2+버튼+썸네일로 구성할 수 있는 `요소 리스트`
+* `image`: 한 개의 이미지를 노출하는 `이미지` 요소
+  * `elementList`: 타이틀+설명1+설명2+버튼+썸네일로 구성할 수 있는 `리스트` 요소
   * `title` : 조금 두꺼운 글자로 표현되는 `타이틀` 요소
   * `description` : `title`보다 조금 흐린 글자로 표현되는 `설명` 요소
   * `buttonList`: 다양한 기능을 가진 `버튼` 요소의 리스트
@@ -523,7 +522,7 @@ Content-Type: application/json;charset=UTF-8
 * `구성요소`의 노출 순서는 변경할 수 없다.
 
 [모든 `구성요소`를 포함한 사용 예]
-```javascript
+```json
 {
     "event": "send",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
@@ -536,7 +535,7 @@ Content-Type: application/json;charset=UTF-8
                 "image": {
                     "imageUrl": "http://shop1.phinf.naver.net/20170216_20/talktalk_14872437839327BN4b_PNG/menu_01.png"
                 },
-                "elementList": {
+                "elementList": { 
                     "type": "list",
                     "data": [
                         {
@@ -547,9 +546,9 @@ Content-Type: application/json;charset=UTF-8
                                 "imageUrl": "http://shop1.phinf.naver.net/20170216_20/talktalk_14872437839327BN4b_PNG/menu_01.png"
                             },
                             "button" : {
-                                "type": "TEXT",
+                                "type": "TEXT", /* 리스트 요소의 버튼은 TEXT와 LINK 타입만 허용된다 */
                                 "data" : {
-                                    "title": "요소버튼",
+                                    "title": "요소버튼", /* 리스트 요소의 버튼 명 (최대 4자) */
                                     "code" : "code"
                                 }
                             }
@@ -578,9 +577,9 @@ Content-Type: application/json;charset=UTF-8
                             "title" : "옵션형 버튼",
                             "buttonList" :[
                                 {
-                                    "type": "TEXT",
+                                    "type": "TEXT", /* 옵션형 버튼은 TEXT, LINK, PAY 타입만 허용된다 */
                                     "data" : {
-                                        "title": "옵션-텍스트버튼",
+                                        "title": "옵션-텍스트버튼", /* 옵션형 버튼에 노출하는 버튼명 (최대 10자) */
                                         "code" : "code"
                                     }
                                 },
@@ -614,8 +613,8 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `compositeList` | Composite[] | Y |  |
 > **[주의사항]**<br>
-* `compositeList`에는 `Composite`을 최대 10개까지 넣을 수 있다.
-* `compositeList`에 넣는 `Composite`은 null일 수 없다.
+> * `compositeList`에는 `Composite`을 최대 10개까지 넣을 수 있다.
+> * `compositeList`에 넣는 `Composite`은 null일 수 없다.
 
 #### Composite object
 
@@ -627,13 +626,13 @@ Content-Type: application/json;charset=UTF-8
 | `elementList` | ElementList | N | `요소 리스트` |
 | `buttonList` | Button[] | N | `버튼` 요소 리스트 |
 > **[주의사항]**<br>
-* 하나의 `composite`에는 `title`, `description`, `elementList` 중 하나는 반드시 존재해야 한다.
-* 하나의 `composite`에는 최소한 두 개의 요소가 존재해야 한다.
-* `title` 최대 길이는 200자이다.
-* `description` 최대 길이는 1000자이다.
-* `title`과 `description`에 줄바꿈이 필요하면 `\n`를 삽입한다.
-* `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있다.
-* `buttonList`에 넣는 `버튼`은 null일 수 없다.
+> * 하나의 `composite`에는 `title`, `description`, `elementList` 중 하나는 반드시 존재해야 한다.
+> * 하나의 `composite`에는 최소한 두 개의 요소가 존재해야 한다.
+> * `title` 최대 길이는 200자이다.
+> * `description` 최대 길이는 1000자이다.
+> * `title`과 `description`에 줄바꿈이 필요하면 `\n`를 삽입한다.
+> * `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있다.
+> * `buttonList`에 넣는 `버튼`은 null일 수 없다.
 
 #### Image object
 
@@ -641,9 +640,9 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `imageUrl` | String | Y | 이미지 URL |
 > **[주의사항]**<br>
-* 권장 이미지 사이즈는 가로 530px, 세로 290px 이다. (비율 1.82:1)
-* 지원포맷 : jpg, png
-* 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일하다.
+> * 권장 이미지 사이즈는 가로 530px, 세로 290px 이다. (비율 1.82:1)
+> * 지원포맷 : jpg, png
+> * 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일하다.
 
 #### ElementList object
 
@@ -652,8 +651,8 @@ Content-Type: application/json;charset=UTF-8
 | `type` | string | Y | 리스트 요소의 타입. 현재는 `list` 타입만 존재 |
 | `data` | ElementData[] | Y | 리스트 요소의 데이터 |
 > **[주의사항]**<br>
-* `data`에는 `ElementData`를 최대 3개까지 넣을 수 있다.
-* `data`에 넣는 `ElementData`는 null일 수 없다.
+> * `data`에는 `ElementData`를 최대 3개까지 넣을 수 있다.
+> * `data`에 넣는 `ElementData`는 null일 수 없다.
 
 #### ElementData object (`list` 타입)
 
@@ -665,13 +664,21 @@ Content-Type: application/json;charset=UTF-8
 | `image` | Image | Y | `이미지` |
 | `button` | Button | N | `버튼` |
 > **[주의사항]**<br>
-* `title` 최대 길이는 N자이다. `title`은 1줄로 노출된다.
-* `description` 최대 길이는 N자이다.
-  * 줄바꿈이 필요하면 `\n`를 삽입한다. `description`은 최대 2줄 노출된다.
-* `subDescription` 최대 길이는 N자이다. `subDescription`은 1줄로 노출된다.
-* `버튼`은 `TEXT`와 `LINK` 타입만 허용되며, `title` 길이는 4자로 제한된다.
+> * `title` 최대 길이는 N자이다. `title`은 1줄로 노출된다.
+> * `description` 최대 길이는 N자이다.
+>   * 줄바꿈이 필요하면 `\n`를 삽입한다. `description`은 최대 2줄 노출된다.
+> * `subDescription` 최대 길이는 N자이다. `subDescription`은 1줄로 노출된다.
+> * `버튼`은 `TEXT`와 `LINK` 타입만 허용되며, `title` 길이는 4자로 제한된다.
 
 #### Button object
+```json
+{
+    "type": "버튼타입",
+    "data": {
+        /* 데이터 */
+    }
+}
+```
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -679,15 +686,35 @@ Content-Type: application/json;charset=UTF-8
 | `data` | ButtonData | Y | `버튼` 요소의 데이터 |
 
 #### ButtonData object (`TEXT` 타입)
+```json
+{
+    "type": "TEXT",
+    "data": {
+        "title" : "타이틀",
+        "code" : "코드"
+    }
+}
+```
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
 | `title` | string | Y | `버튼`에 노출되는 텍스트. `유저`가 버튼을 클릭하면 전송되는 `텍스트` |
 | `code` | string | N | `유저`가 버튼을 클릭하면 전송되는 `코드` |
 > **[주의사항]**<br>
-* `title`의 최대 길이는 18자이다.
+> * `title`의 최대 길이는 18자이다.
+> * `code`의 최대 길이는 1000자이다.
 
 #### ButtonData object (`LINK` 타입)
+```json
+{
+    "type": "LINK",
+    "data": {
+        "title" : "버튼에 노출되는 텍스트",
+        "url" : "http://your-pc-url.com",
+        "mobileUrl" : "http://your-mobile-url.com"
+    }
+}
+```
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -698,133 +725,57 @@ Content-Type: application/json;charset=UTF-8
 | `pcTarget` | string | N | PC 채팅창에서 `버튼`을 클릭했을 때 페이지를 여는 방식. `blank`, `self`, `popup`이 있다. 기본값은 `blank` |
 | `pcPopupSpecs` | string | N | PC 채팅창에서 팝업을 열 때 사용하는 파라미터 |
 > **[주의사항]**<br>
-* `title`의 최대 길이는 18자이다.
-* `blank`은 자창. `self`는 새창. `popup`은 팝업으로 링크를 연다.
-* `pcPopupSpecs`는 [MDN Window.open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)에 기술된 3번째 파라미터 명세서를 따른다.
-  * 이 중 width, height, resizable, status, titlebar, toolbar, menubar, scrollbars 속성만 허용한다.
+> * `title`의 최대 길이는 18자이다.
+> * `blank`은 자창. `self`는 새창. `popup`은 팝업으로 링크를 연다.
+> * `pcPopupSpecs`는 [MDN Window.open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)에 기술된 3번째 파라미터 명세서를 따른다.
+>   * 이 중 width, height, resizable, status, titlebar, toolbar, menubar, scrollbars 속성만 허용한다.
 
 #### ButtonData object (`OPTION` 타입)
-
-| key | Type | 필수 | 설명 |
-|:---:|:----:|:----:|------|
-| `title` | string | Y | `버튼`에 노출되는 텍스트 |
-| `buttonList` | Button[] | Y | `버튼` 클릭시 채팅창 하단에 노출되는 `버튼`의 목록 |
-> **[주의사항]**<br>
-* `title`의 최대 길이는 18자이다.
-* `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있다.
-* `buttonList`에 넣는 `버튼`은 null일 수 없다.
-* `buttonList`의 `버튼`에는 `TEXT`, `LINK`, `PAY` 타입만 허용된다. `title`은 10자로 제한된다.
-
-#### ButtonData object (`PAY` 타입)
-
-| key | Type | 필수 | 설명 |
-|:---:|:----:|:----:|------|
-| `payKey` | string | Y | 네이버 페이 결제 키 |
-
-
-[실제 compositeContent 사용 예]
-<br>
-<img src="compositeContent_01.png" width="50%" height="50%" />
-<br>
-
-[위의 캡쳐이미지에 대응하는 이벤트 전문]
-```javascript
+```json
 {
-    "event": "send",
-    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
-
-    "compositeContent": {
-        /* compositeList에 2개이상 composite를 넣게되는경우 캐로셀(Carousel)형태로 좌우 플리킹이가능함, 최소 1개부터 최대 10개까지 composite 구성가능 */
-        "compositeList":[
+    "type": "OPTION",
+    "data": {
+        "title" : "버튼에 노출되는 텍스트",
+        "buttonList" : [
             {
-                "title": "브레이즈드포크콜라세트\n(정가34,700원)\n\n*배달27,760원(20%할인)\n*포장22,550원(35%할인)", /* bold스타일의 텍스트 (최대 200자) */
-                "description": "네이버페이포인트3,470원(10%)적립\n\n브레이즈드포크(오)L+콜라1.25L", /* gray스타일의 title아래 텍스트 (최대 1,000자) */
-                /* imageContent와 상동 */
-                "image": {
-                    "imageUrl": "http://shop1.phinf.naver.net/20170216_20/talktalk_14872437839327BN4b_PNG/menu_01.png" /* 전송하고자하는 이미지 URL */
-                },
-                /* composite 메시지 하단 버튼 정의 (최대 10개가능) */
-                "buttonList": [
-                    /* TEXT 버튼은 유저가 textContent 를 보내는 것처럼 동작 */
-                    {
-                        "type": "TEXT",
-                        "data" : {
-                            "title": "브레이즈드포크 콜라세트 주문하기", /* 버튼에 노출하는 버튼명 (최대 20자)*/
-                            "code": "1" /* code를 정의하는경우 유저가 보내는 send이벤트 textContent에 code가 삽입되어 전송됨 (최대 1,000자)*/
-                        }
-                    },
-                    /* LINK 버튼은 톡톡밖의 웹 페이지로 이동 */
-                    {
-                        "type": "LINK",
-                        "data": {
-                            "title": "메뉴 상세보기", /* 버튼에 노출하는 버튼명 (최대 20자)*/
-                            "url": "https://dominos-bot.talk.naver.com/view/menu/1", /* 톡톡 PC버전 채팅창에서 링크 URL */
-                            "mobileUrl": "https://dominos-bot.talk.naver.com/view/menu/1#nafullscreen" /* 톡톡 모바일버전 채팅창에서 링크 URL */
-                        }
-                    }
-                ]
-            },
-            {
-                "title": "브레이즈드포크치킨세트\n(정가42,500원)\n\n*배달34,000원(20%할인)\n*포장27,620원(35%할인)",
-                "description": "네이버페이포인트4,250원(10%)적립\n\n브레이즈드포크(오)L+크리스피오곡치킨+콜라1.25",
-                "image": {
-                    "imageUrl": "http://shop1.phinf.naver.net/20170216_293/talktalk_1487243783876tBxJN_PNG/menu_02.png"
-                },
-                "buttonList": [
-                    {
-                        "type": "TEXT",
-                        "data" : {
-                            "title": "브레이즈드포크치킨세트주문하기",
-                            "code": "2"
-                        }
-                    },
-                    {
-                        "type": "LINK",
-                        "data": {
-                            "title": "메뉴 상세보기",
-                            "url": "https://dominos-bot.talk.naver.com/view/menu/2",
-                            "mobileUrl": "https://dominos-bot.talk.naver.com/view/menu/2#nafullscreen"
-                        }
-                    }
-                ]
-            },
-            {
-                "title": "찾으시는 메뉴가 없으신가요?\n\n더 다양한 메뉴는 도미노피자 홈페이지에서 주문하세요~",
-                "description": "(단, 네이버페이 적립혜택은 제공되지 않습니다.)",
-                "image": {
-                    "imageUrl": "http://shop1.phinf.naver.net/20170223_61/talktalk_14878329601286Mh1K_PNG/menu_00_etc.png"
-                },
-                "buttonList": [
-                    {
-                        "type": "LINK",
-                        "data": {
-                            "title": "도미노피자온라인주문하기",
-                            "url": "http://www.dominos.co.kr/index.do",
-                            "mobileUrl": "http://m.dominos.co.kr/index.do"
-                        }
-                    },
-                    {
-                        "type": "LINK",
-                        "data": {
-                            "title": "도미노피자챗봇도움말보기",
-                            "url": "https://help.naver.com/support/contents/contents.nhn?serviceNo=11764&categoryNo=17512",
-                            "mobileUrl": "https://m.help.naver.com/support/contents/contentsView.nhn?contentsNo=6940&lang=ko"
-                        }
-                    },
-                    {
-                        "type": "LINK",
-                        "data": {
-                            "title": "페이포인트 적립안내",
-                            "url": "https://dominos-bot.talk.naver.com/view/event/pay",
-                            "mobileUrl": "https://dominos-bot.talk.naver.com/view/event/pay#nafullscreen"
-                        }
-                    }
-                ]
+                "type": "타이틀",
+                "data": {
+                    /* 버튼 데이터*/
+                }
             }
         ]
     }
 }
 ```
+
+| key | Type | 필수 | 설명 |
+|:---:|:----:|:----:|------|
+| `title` | string | Y | `버튼`에 노출되는 텍스트 |
+| `buttonList` | Button[] | Y | `버튼` 클릭시 채팅창 하단에 노출되는 `버튼`의 목록 |
+> **[주의사항]**
+> * `title`의 최대 길이는 18자이다.
+> * `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있다.
+> * `buttonList`에 넣는 `버튼`은 null일 수 없다.
+> * `buttonList`의 `버튼`에는 `TEXT`, `LINK`, `PAY` 타입만 허용된다. `title`은 10자로 제한된다.
+
+#### ButtonData object (`PAY` 타입)
+```json
+{
+    "type": "PAY",
+    "data": {
+        /* 스펙 확정 전 */
+    }
+}
+```
+
+| key | Type | 필수 | 설명 |
+|:---:|:----:|:----:|------|
+| ??? | ??? | ??? | ??? |
+
+> **[주의사항]**
+> * 스펙 확정 전
+
+#### 컴포지트 메시지 사용 가이드
 > **[사용팁]**<br>
 > `compositeList`에 들어가는 `composite`항목은 아래와 같은 제약이 있다.
 > - `title`, `description`, `elementList` 중 적어도 한개의 속성은 존재해야 한다.
@@ -864,6 +815,81 @@ Content-Type: application/json;charset=UTF-8
 >위와같이 토큰방식이 구현되면 비록 동일한 유저라 하더라도 `compositeContent`에 넣어주는 토큰은 매번 변경될 것이고, 임의로 예측할 수 없을만큼 긴 토큰을 사용한다면 더욱 안전하게 유저 식별값을 보호 할 수 있다.
 <br>
 <br>
+
+### 퀵버튼
+<img src="btn_quick.jpg">
+
+* `compositeContent`의 `OPTION`타입 버튼과 유사한 기능을 `textContent`와 `imageContent`에도 지원합니다. 
+* 메시지를 전송하면 채팅창 하단에 버튼이 나열됩니다.
+
+#### textContent에 퀵버튼 적용
+```json
+{
+    "event": "send",
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    
+    "textContent": {
+        "text": "텍스트",
+        "code": "코드",
+        "quickReply" : { /* 퀵버튼 - 빠른응답 */
+            "buttonList" : [ /* 버튼 리스트 */
+                {
+                    "type" : "TEXT", /* 모든 타입의 버튼이 사용 가능합니다. */
+                    "data" : {
+                        /* 버튼 데이터 */
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+#### imageContent에 퀵버튼 적용
+```json
+{
+    "event": "send",
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    
+    "imageContent": {
+        "imageUrl": "http://blogfiles5.naver.net/20130918_119/city0080_137946683395507ioT_JPEG/6.jpg", /* 전송하고자하는 이미지 URL */
+        "quickReply" : { /* 퀵버튼 - 빠른응답 */
+            "buttonList" : [ /* 버튼 리스트 */
+                {
+                    "type" : "TEXT", /* 모든 타입의 버튼이 사용 가능합니다. */
+                    "data" : {
+                        /* 버튼 데이터 */
+                    }
+                }
+            ]
+        }
+    }
+}
+```
+
+#### compositeContent에 퀵버튼 적용
+```json
+{
+    "event": "send",
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    
+    "compositeContent": {
+        "compositeList": [
+            /* composite 리스트 */
+        ],
+        "quickReply" : { /* 퀵버튼 - 빠른응답 */
+            "buttonList" : [ /* 버튼 리스트 */
+                {
+                    "type" : "TEXT", /* 모든 타입의 버튼이 사용 가능합니다. */
+                    "data" : {
+                        /* 버튼 데이터 */
+                    }
+                }
+            ]
+        }
+    }
+}
+```
 
 ## ERROR 명세서
 
