@@ -172,7 +172,7 @@ app.post('/', (req, res) => {
     case 'send' :
       if(req.body.textContent) {
         // 유저가 보내는 메시지에 대해 echo로 전송
-        response.request.textContent.text = 'echo: ' + req.body.textContent.text;
+        response.textContent.text = 'echo: ' + req.body.textContent.text;
         res.json(response);
 
       } else {
@@ -186,13 +186,13 @@ app.post('/', (req, res) => {
       switch(req.body.options.inflow) {
         // 채팅리스트로부터 인입되었을때
         case 'list' :
-          response.request.textContent.text = '리스트에서 눌러서 방문하셨네요.';
+          response.textContent.text = '리스트에서 눌러서 방문하셨네요.';
           res.json(response);
           break;
 
         // 유입경로가 없거나 화면을 갱신하였을때
         case 'none' :
-          response.request.textContent.text = '화면을 갱신하셨네요.';
+          response.textContent.text = '화면을 갱신하셨네요.';
           res.json(response);
           break;
 
@@ -205,12 +205,12 @@ app.post('/', (req, res) => {
     case 'friend' :
       if(req.body.options.set == 'on') {
         // 친구 추가시
-        response.request.textContent.text = '친구가되어주셔서 감사합니다.';
+        response.textContent.text = '친구가되어주셔서 감사합니다.';
         res.json(response);
 
       } else if(req.body.options.set == 'off') {
         // 친구 철회시
-        response.request.textContent.text = '다음번에 꼭 친구추가 부탁드려요.';
+        response.textContent.text = '다음번에 꼭 친구추가 부탁드려요.';
         res.json(response);
       }
       break;
