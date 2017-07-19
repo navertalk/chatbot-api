@@ -723,7 +723,8 @@ Content-Type: application/json;charset=UTF-8
 | `mobileUrl` | string | Y | 모바일 버전 채팅창에서 `버튼`을 클릭하면 이동할 페이지 URL |
 > **[주의사항]**<br>
 > * `title`의 최대 길이는 18자이다.
-> * `blank`은 자창. `self`는 새창. `popup`은 팝업으로 링크를 연다.
+> * 모바일 채팅창에서는 `현재 창`에서 링크를 열고 PC에서는 `새 창`으로 링크를 연다.
+> * 모바일에서 `현재 창`으로 이동한 페이지에서 다시 돌아올 때는 반드시 `뒤로가기` `history.back()`을 이용한다.
 
 #### ButtonData object (`OPTION` 타입)
 ```javascript
