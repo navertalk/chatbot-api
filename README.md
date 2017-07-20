@@ -21,9 +21,6 @@
   * [`send` 이벤트](#send-이벤트)
 * [메시지 데이터 명세](#메시지-데이터-명세)
 * [ERROR 명세서](#error-명세서)
-* [부록](#부록)
-  * [API V1.0에서 V1.2로 마이그레이션시 변경된 내용](#api-v10에서-v12로-마이그레이션시-변경된-내용)
-  * [기존 `user` 식별값과 최신 `user` 식별값 변환방법](#기존-user-식별값과-최신-user-식별값-변환방법)
 <br>
 <br>
 
@@ -931,46 +928,3 @@ HTTP/1.1 200 OK
 | false | `IMG-03` | 이미지 업로드 - 사이즈 초과 | 업로드하는 이미지가 20MB를 넘는경우 발생 |
 <br>
 <br>
-
-## 부록
-
-### API V1.0에서 V1.2로 마이그레이션시 변경된 내용
-#### 챗봇등록 신청 단순화
-* `https://developers.naver.com/`를 통한 애플리케이션 등록없이도 `파트너센터`를 통해 파트너별 인증키를 발급받아 사용가능합니다.
-  * 더 이상 `X-Naver-Client-Id`와 `X-Naver-Client-Secret`를 사용하지 않습니다.
-  * 네이버 `API Gateway Server`를 경유하지 않으므로 더이상 게이트웨이서버의 `Error Code`를 구현하시지 않아도 됩니다.
-* `Webhook URL`등록 및 변경요청을 기존 이메일방식이 아니라 `파트너센터` > `챗봇 API` 페이지를 통해 언제든 수정이 가능합니다.
-  * 더 이상 `Line`, `Slack`등 커뮤니케이션 채널을 생성하지 않아도 스스로 챗봇 설정을 할 수 있습니다.
-
-#### 이벤트 포맷 변경
-* 이벤트에 항상 포함되었던 `partner`와 `sender`속성이 제거되었습니다.
-  * `partner`식별은 `보내기 API`호출시 인증키에 포함된 파트너 식별값을 참조합니다.
-  * `sender`에는 `user` 또는 `partner` 구분자로 이벤트 발생자를 구분하였지만, `톡톡`에서 `챗봇`으로 보내는 모든 이벤트는 `user`가 발생시킨 이벤트이고 `챗봇`이 `톡톡`에게 보내는 모든 이벤트는 `partner`가 발생시킨 이벤트 이므로 제거하였습니다.
-* `block` 이벤트가 삭제되었습니다.
-  * 유저마다 `block`된 상태를 `톡톡`과 `챗봇`이 동기화하기가 어렵습니다.
-  * `챗봇` 연동은 언제든 On/Off 될 수 있으며 수신 이벤트 또한 선택할 수 있기때문에 `block`상태는 동기화될 수 없습니다.
-  * 단순히 `block`된 상태에서는 `톡톡`에서 `챗봇`으로 더 이상 이벤트를 전송하지 않을것이고 `block`이 풀리면 이때부터 이벤트가 발생하게 됩니다.
-* `open` 이벤트에 `friend`(친구) 여부를 추가하였습니다.
-  * `friend`이벤트 또한 `block`이벤트 처럼 동기화하기 어렵습니다.
-  * `open`이벤트에 `friend`속성을 추가하여 `챗봇`에서 친구여부를 저장하지 않아도 `친구`여부를 파악할 수 있습니다.
-* 그동안 `챗봇`에서 `send`, `open`, `friend`, `leave` 이벤트에 대해 모두 처리하도록 프로그래밍하여야했지만, `챗봇 API` 페이지를 통해 관심있는 이벤트만 수신이 가능합니다.
-* `user`식별값을 좀더 짧은 스트링으로 표현하기 위해 Hexa문자를 Base64문자로 변경하였습니다.
-  * 기존 V1.0에서 회원식별을 저장하고 있었다면, 아래 `user`식별값 변환방법을 참조하여 V1.2와 호환가능하도록 할 수 있습니다.
-<br>
-<br>
-
-### 기존 `user` 식별값과 최신 `user` 식별값 변환방법
-
-[최신에서 기존 `user`식별값으로 변환]
-```java
-    String user = "al-2eGuGr5WQOnco1_V-FQ";
-    byte[] bytes = java.util.Base64.getUrlDecoder().decode(user);
-    System.out.println(org.apache.commons.codec.binary.Hex.encodeHexString(bytes));
-```
-
-[기존에서 최신 `user`식별값으로 변환]
-```java
-    String user = "6a5fb6786b86af95903a7728d7f57e15";
-    byte[] bytes = org.apache.commons.codec.binary.Hex.decodeHex(user.toCharArray());
-    System.out.println(java.util.Base64.getUrlEncoder().encodeToString(bytes).replace("=", ""));
-```
