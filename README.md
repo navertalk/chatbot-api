@@ -533,7 +533,7 @@ Content-Type: application/json;charset=UTF-8
                     "imageUrl": "http://shop1.phinf.naver.net/20170216_20/talktalk_14872437839327BN4b_PNG/menu_01.png"
                 },
                 "elementList": { 
-                    "type": "list",
+                    "type": "LIST",
                     "data": [
                         {
                             "title" : "리스트 요소 타이틀",
@@ -645,13 +645,13 @@ Content-Type: application/json;charset=UTF-8
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
-| `type` | string | Y | 리스트 요소의 타입. 현재는 `list` 타입만 존재 |
+| `type` | string | Y | 리스트 요소의 타입. 현재는 `LIST` 타입만 존재 |
 | `data` | ElementData[] | Y | 리스트 요소의 데이터 |
 > **[주의사항]**<br>
 > * `data`에는 `ElementData`를 최대 3개까지 넣을 수 있다.
 > * `data`에 넣는 `ElementData`는 null일 수 없다.
 
-#### ElementData object (`list` 타입)
+#### ElementData object (`LIST` 타입)
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
