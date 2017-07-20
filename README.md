@@ -814,7 +814,7 @@ Content-Type: application/json;charset=UTF-8
 
 * `compositeContent`의 `OPTION`타입 버튼과 유사한 기능을 `textContent`와 `imageContent`에도 지원한다. 
 * 메시지를 전송하면 채팅창 하단에 `버튼`이 나열된다.
-* `TEXT`, `LINK`, `OPTION`, `PAY` 모든 타입의 버튼이 허용된다.
+* `TEXT`, `LINK`, `PAY` 타입의 버튼이 허용된다.
 * 버튼 `title`의 글자 수는 10자로 제한된다.
 
 #### textContent에 퀵버튼 적용
@@ -829,7 +829,7 @@ Content-Type: application/json;charset=UTF-8
         "quickReply" : { /* 퀵버튼 - 빠른응답 */
             "buttonList" : [ /* 버튼 리스트 */
                 {
-                    "type" : "TEXT", /* 모든 타입의 버튼이 허용된다. */
+                    "type" : "TEXT", /* TEXT, LINK, PAY 타입의 버튼이 허용된다. */
                     "data" : {
                         /* 버튼 데이터 */
                     }
