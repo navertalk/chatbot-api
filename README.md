@@ -18,8 +18,14 @@
   * [textContent](#textcontent)
   * [imageContent](#imagecontent)
   * [compositeContent](#compositecontent)
-    * [compositeContent](#compositecontent)
-  
+    * [`CompositeContent` Object](#compositecontent-object)
+    * [`Composite` Object](#composite-object)
+    * [`Image` Object](#image-object)
+    * [`ElementList` Object](#elementlist-object)
+    * [`ElementData` Object (`LIST` 타입)](#elementdata-object-list-타입)
+    * [`Button` Object](#button-object)
+    * [컴포지트 메시지 사용 가이드](#컴포지트-메시지-사용-가이드)
+  * [퀵버튼](#퀵버튼)
 * [ERROR 명세서](#error-명세서)
 <br>
 <br>
@@ -677,7 +683,7 @@ Content-Type: application/json;charset=UTF-8
 > * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 4자로 제한됩니다.
 <br>
 
-##### `Button` Object
+#### `Button` Object
 ```javascript
 {
     "type": "버튼타입",
