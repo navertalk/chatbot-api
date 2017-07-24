@@ -14,7 +14,12 @@
   * [`leave` 이벤트](#leave-이벤트)
   * [`friend` 이벤트](#friend-이벤트)
   * [`send` 이벤트](#send-이벤트)
-* [메시지 데이터 명세](#메시지-데이터-명세)
+* [메시지 타입 명세서](#메시지-타입-명세서)
+  * [textContent](#textcontent)
+  * [imageContent](#imagecontent)
+  * [compositeContent](#compositecontent)
+    * [compositeContent](#compositecontent)
+  
 * [ERROR 명세서](#error-명세서)
 <br>
 <br>
@@ -596,7 +601,7 @@ Content-Type: application/json;charset=UTF-8
 ```
 <br>
 
-#### `CompositeContent` object
+#### `CompositeContent` Object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -607,7 +612,7 @@ Content-Type: application/json;charset=UTF-8
 > * `compositeList`에 넣는 `Composite`은 `null`일 수 없습니다.
 <br>
 
-#### `Composite` object
+#### `Composite` Object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -627,7 +632,7 @@ Content-Type: application/json;charset=UTF-8
 > * `buttonList`에 넣는 `버튼`은 `null`일 수 없습니다.
 <br>
 
-#### `Image` object
+#### `Image` Object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -639,7 +644,7 @@ Content-Type: application/json;charset=UTF-8
 > * 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일합니다.
 <br>
 
-#### `ElementList` object
+#### `ElementList` Object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -651,7 +656,7 @@ Content-Type: application/json;charset=UTF-8
 > * `data`에 넣는 `ElementData`는 `null`일 수 없습니다.
 <br>
 
-#### `ElementData` object (`LIST` 타입)
+#### `ElementData` Object (`LIST` 타입)
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -672,7 +677,7 @@ Content-Type: application/json;charset=UTF-8
 > * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 4자로 제한됩니다.
 <br>
 
-##### `Button` object
+##### `Button` Object
 ```javascript
 {
     "type": "버튼타입",
@@ -688,7 +693,7 @@ Content-Type: application/json;charset=UTF-8
 | `data` | ButtonData | Y | `버튼` 요소의 데이터 |
 <br>
 
-##### `ButtonData` object (`TEXT` 타입)
+##### `ButtonData` Object (`TEXT` 타입)
 ```javascript
 {
     "type": "TEXT",
@@ -709,7 +714,7 @@ Content-Type: application/json;charset=UTF-8
 > * `code`의 최대 길이는 1,000자 입니다.
 <br>
 
-##### `ButtonData` object (`LINK` 타입)
+##### `ButtonData` Object (`LINK` 타입)
 ```javascript
 {
     "type": "LINK",
@@ -733,7 +738,7 @@ Content-Type: application/json;charset=UTF-8
 > * 모바일에서는 `현재 창`으로 이동한 페이지에서 다시 채팅창으로 돌아올 때는 반드시 `뒤로가기` 또는 `history.back()`을 이용해야 합니다.
 <br>
 
-##### `ButtonData` object (`OPTION` 타입)
+##### `ButtonData` Object (`OPTION` 타입)
 ```javascript
 {
     "type": "OPTION",
