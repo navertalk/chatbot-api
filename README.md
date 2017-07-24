@@ -662,13 +662,13 @@ Content-Type: application/json;charset=UTF-8
 | `button` | Button | N | `버튼` |
 
 > **[주의사항]**
-> * `title` 최대 길이는 ?자입니다.
+> * `title` 최대 길이는 ?자 입니다.
 >   * `title`은 1줄로 노출됩니다.
-> * `description` 최대 길이는 ?자입니다.
->   * 줄바꿈이 필요하면 `\n`를 삽입합니다.
->   * `description`은 최대 2줄 노출됩니다.
-> * `subDescription` 최대 길이는 N자입니다.
->   * `subDescription`은 1줄로 노출됩니다.
+> * `description` 최대 길이는 ?자 입니다.
+>   * 줄바꿈이 필요하면 `\n`를 삽입합니다.
+>   * `description`은 최대 2줄 노출됩니다.
+> * `subDescription` 최대 길이는 ?자 입니다.
+>   * `subDescription`은 1줄로 노출됩니다.
 > * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 4자로 제한됩니다.
 <br>
 
@@ -688,7 +688,7 @@ Content-Type: application/json;charset=UTF-8
 | `data` | ButtonData | Y | `버튼` 요소의 데이터 |
 <br>
 
-#### `ButtonData` object (`TEXT` 타입)
+##### `ButtonData` object (`TEXT` 타입)
 ```javascript
 {
     "type": "TEXT",
@@ -705,11 +705,11 @@ Content-Type: application/json;charset=UTF-8
 | `code` | string | N | `유저`가 버튼을 클릭하면 전송되는 `코드` |
 
 > **[주의사항]**
-> * `title`의 최대 길이는 18자입니다.
-> * `code`의 최대 길이는 1,000자입니다.
+> * `title`의 최대 길이는 18자 입니다.
+> * `code`의 최대 길이는 1,000자 입니다.
 <br>
 
-#### `ButtonData` object (`LINK` 타입)
+##### `ButtonData` object (`LINK` 타입)
 ```javascript
 {
     "type": "LINK",
@@ -728,17 +728,18 @@ Content-Type: application/json;charset=UTF-8
 | `mobileUrl` | string | Y | 모바일 버전 채팅창에서 `버튼`을 클릭하면 이동할 페이지 URL |
 
 > **[주의사항]**
-> * `title`의 최대 길이는 18자입니다.
-> * 모바일 채팅창에서는 `현재 창`에서 링크를 열고 PC에서는 `새 창`으로 링크를 연다.
-> * 모바일에서 `현재 창`으로 이동한 페이지에서 다시 채팅창으로 돌아올 때는 반드시 `뒤로가기` `history.back()`을 이용한다.
+> * `title`의 최대 길이는 18자 입니다.
+> * 모바일에서는 `현재 창`에서 링크를 열고 PC에서는 `새 창`으로 링크를 엽니다.
+> * 모바일에서는 `현재 창`으로 이동한 페이지에서 다시 채팅창으로 돌아올 때는 반드시 `뒤로가기` 또는 `history.back()`을 이용해야 합니다.
+<br>
 
-#### ButtonData object (`OPTION` 타입)
+##### `ButtonData` object (`OPTION` 타입)
 ```javascript
 {
     "type": "OPTION",
     "data": {
-        "title" : "버튼에 노출되는 텍스트",
-        "buttonList" : [
+        "title": "버튼에 노출되는 텍스트",
+        "buttonList": [
             {
                 "type": "타이틀",
                 "data": {
@@ -754,28 +755,14 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `title` | string | Y | `버튼`에 노출되는 텍스트 |
 | `buttonList` | Button[] | Y | `버튼` 클릭시 채팅창 하단에 노출되는 `버튼`의 목록 |
-> **[주의사항]**
-> * `title`의 최대 길이는 18자이다.
-> * `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있다.
-> * `buttonList`에 넣는 `버튼`은 null일 수 없다.
-> * `buttonList`의 `버튼`에는 `TEXT`, `LINK`, `PAY` 타입만 허용된다. `title`은 10자로 제한된다.
-
-#### ButtonData object (`PAY` 타입)
-```javascript
-{
-    "type": "PAY",
-    "data": {
-        /* 스펙 확정 전 */
-    }
-}
-```
-
-| key | Type | 필수 | 설명 |
-|:---:|:----:|:----:|------|
-| ??? | ??? | ??? | ??? |
 
 > **[주의사항]**
-> * 스펙 확정 전
+> * `title`의 최대 길이는 18자 입니다.
+> * `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있습니다.
+> * `buttonList`에 넣은 `버튼`은 `null`일 수 없습니다.
+> * `buttonList`의 `버튼`에는 `TEXT`, `LINK`, `PAY` 타입만 허용됩니다.
+>   * `title`은 10자로 제한된다.
+<br>
 
 #### 컴포지트 메시지 사용 가이드
 > **[사용팁]**<br>
