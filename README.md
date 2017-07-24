@@ -227,9 +227,9 @@ app.listen(8080);
 <br>
 <br>
 
-## API 연동을 위한 `보내기 API`
+## `보내기 API`
 * 보통 단순한 챗봇들은 `Webhook`만으로도 구현이 가능합니다.
-* 그러나 유저의 질문에 단순 대답하는 형태가 아니고 상태변화나 사건발생에 따라 유저에게 메시지를 푸시해야한다면 `보내기 API`를 사용하여 외부 서비스에서 톡톡으로 이벤트를 전송해야합니다.
+* 그러나 유저의 질문에 단순 대답하는 형태가 아니고 상태변화나 사건발생에 따라 유저에게 메시지를 푸시해야한다면 `보내기 API`를 사용하여 챗봇에서 톡톡으로 이벤트를 전송해야합니다.
 <br>
 
 ### API 호출 테스트
@@ -241,6 +241,9 @@ curl -X POST \
     -d '{"event":"send","user":"al-2eGuGr5WQOnco1_V-FQ","textContent":{"text":"hello world"}}' \
     "https://gw.talk.naver.com/chatbot/v1/event"
 ```
+* `Authorization`은 `API 설정` > `보내기 API`에서 `생성`버튼을 눌러 인증키를 받으실 수 있습니다.
+* 만약 인증키 `Authorization`가 공개될 경우 `재설정`버튼을 눌러 인증키를 변경하실 수 있습니다.
+<br>
 
 [`response`]
 ```javascript
@@ -251,6 +254,7 @@ HTTP/1.1 200 OK
     "resultCode": "00"
 }
 ```
+* 응답결과는 `ERROR 명세서`(#error-명세서)를 참고해 주세요.
 <br>
 <br>
 
