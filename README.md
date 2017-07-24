@@ -103,30 +103,32 @@ curl -X POST -H "Content-Type: application/json" -d '{ "event": "test" }' "http:
 <br>
 
 #### 4. 연동이 완료되어 톡톡으로부터 이벤트를 수신합니다.
-* https://talk.naver.com/{파트너아이디(ex)wc1234} 에 접근하여, 유저로서 이벤트를 발생시켜봅니다.
-  * [채팅창에 진입했을때 이벤트 로그]
+* https://talk.naver.com/{파트너아이디 (예)wc1234} 에 접근하여, 유저로서 이벤트를 발생시켜봅니다.
+<br>
+
+* [채팅창에 진입했을때 이벤트 로그]
 
     ```javascript
-    { event: 'open',
-      user: 'al-2eGuGr5WQOnco1_V-FQ',
-      options: {
-        inflow: 'list',
-        referer: 'https://talk.naver.com/',
-        friend: false,
-        under14: false,
-        under19: false
+    { "event": "open",
+      "user": "al-2eGuGr5WQOnco1_V-FQ",
+      "options": {
+        "inflow": "list",
+        "referer": "https://talk.naver.com/",
+        "friend": false,
+        "under14": false,
+        "under19": false
       }
     }
     ```
 
-  * [채팅창에 `hello world`메시지를 보냈을때 이벤트 로그]
+* [채팅창에 `hello world`메시지를 보냈을때 이벤트 로그]
 
     ```javascript
     {
-      event: 'send',
-      user: 'al-2eGuGr5WQOnco1_V-FQ',
-      textContent: {
-        text: 'hello world'
+      "event": "send",
+      "user": "al-2eGuGr5WQOnco1_V-FQ",
+      "textContent": {
+        "text": "hello world"
       }
     }
     ```
@@ -238,7 +240,7 @@ app.listen(8080);
 curl -X POST \
     -H "Content-Type: application/json" \
     -H "Authorization: ct_wc8b1i_Pb1AXDQ0RZWuCccpzdNL" \
-    -d '{"event":"send","user":"al-2eGuGr5WQOnco1_V-FQ","textContent":{"text":"hello world"}}' \
+    -d '{ "event": "send", "user": "al-2eGuGr5WQOnco1_V-FQ", "textContent": { "text": "hello world" } }' \
     "https://gw.talk.naver.com/chatbot/v1/event"
 ```
 * `Authorization`은 `API 설정` > `보내기 API`에서 `생성`버튼을 눌러 인증키를 받으실 수 있습니다.
@@ -254,16 +256,17 @@ HTTP/1.1 200 OK
     "resultCode": "00"
 }
 ```
-* 응답결과는 `ERROR 명세서`(#error-명세서)를 참고해 주세요.
+* 응답결과는 [`ERROR 명세서`](#error-명세서)를 참고해 주세요.
 <br>
 <br>
 
 ## 이벤트 명세서
+<br>
 
 ### 이벤트 기본 구조
 <br>
 
-[Request 메시지 구조]
+[`Request` 메시지 구조]
 ```javascript
 POST / HTTP/1.1
 Host: your.bot.co.kr
@@ -278,15 +281,15 @@ Accept: application/json
 }
 ```
 
-* `event`에는 다양한 이벤트를 식별할 수 있는 `이벤트명`이 들어온다.
-* 특정 이벤트만으로 설명될 수 없는 추가적인 속성은 `options`를 통해 정보를 얻을 수 있다.
-* 톡톡에서 1:1대화란 `파트너(partner)`와 `유저(user)`와의 대화이다.
-  * 봇은 `partner`에 해당되며, 봇을 사용하는 네이버유저는 `user`에 해당한다.
-  * `"user": "al-2eGuGr5WQOnco1_V-FQ"`는 유저식별값이며 특정 `네이버아이디`에 해당하는 변하지않는 절대값이다.
+* `event`에는 다양한 이벤트들을 식별할 수 있는 `이벤트명`이 들어옵니다.
+* 특정 이벤트만으로 설명될 수 없는 추가적인 속성은 `options`를 통해 정보를 얻을 수 있습니다.
+* 톡톡에서 1:1대화란 `파트너(partner)`와 `유저(user)`와의 대화입니다.
+  * 챗봇은 `partner`에 해당되며, 챗봇을 사용하는 네이버유저는 `user`에 해당합니다.
+  * `"user": "al-2eGuGr5WQOnco1_V-FQ"`는 유저식별값이며 특정 `네이버아이디`에 해당하는 변하지않는 절대값입니다.
 <br>
 <br>
 
-[Response 메시지 구조]
+[`Response` 메시지 구조]
 ```javascript
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -295,7 +298,7 @@ Content-Type: application/json;charset=UTF-8
 {
   "event": "send",
   "textContent": {
-    "text": "hi"
+    "text": "hello world"
   }
 }
 ```
