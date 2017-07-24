@@ -109,14 +109,15 @@ curl -X POST -H "Content-Type: application/json" -d '{ "event": "test" }' "http:
 * [채팅창에 진입했을때 이벤트 로그]
 
     ```javascript
-    { "event": "open",
+    { 
+      "event": "open",
       "user": "al-2eGuGr5WQOnco1_V-FQ",
       "options": {
-        "inflow": "list",
-        "referer": "https://talk.naver.com/",
-        "friend": false,
-        "under14": false,
-        "under19": false
+          "inflow": "list",
+          "referer": "https://talk.naver.com/",
+          "friend": false,
+          "under14": false,
+          "under19": false
       }
     }
     ```
@@ -128,7 +129,7 @@ curl -X POST -H "Content-Type: application/json" -d '{ "event": "test" }' "http:
       "event": "send",
       "user": "al-2eGuGr5WQOnco1_V-FQ",
       "textContent": {
-        "text": "hello world"
+          "text": "hello world"
       }
     }
     ```
@@ -284,8 +285,8 @@ Accept: application/json
 * `event`에는 다양한 이벤트들을 식별할 수 있는 `이벤트명`이 들어옵니다.
 * 특정 이벤트만으로 설명될 수 없는 추가적인 속성은 `options`를 통해 정보를 얻을 수 있습니다.
 * 톡톡에서 1:1대화란 `파트너(partner)`와 `유저(user)`와의 대화입니다.
-  * 챗봇은 `partner`에 해당되며, 챗봇을 사용하는 네이버유저는 `user`에 해당합니다.
-  * `"user": "al-2eGuGr5WQOnco1_V-FQ"`는 유저식별값이며 특정 `네이버아이디`에 해당하는 변하지않는 절대값입니다.
+  * 챗봇은 `partner`에 해당되며, 챗봇을 사용하는 네이버유저는 `user`에 해당합니다.
+  * `"user": "al-2eGuGr5WQOnco1_V-FQ"`는 유저식별값이며 특정 `네이버아이디`에 해당하는 변하지않는 절대값입니다.
 <br>
 <br>
 
@@ -298,19 +299,22 @@ Content-Type: application/json;charset=UTF-8
 {
   "event": "send",
   "textContent": {
-    "text": "hello world"
+      "text": "hello world"
   }
 }
 ```
-* 봇에서 이벤트전달에 대한 응답으로 `HTTP Status`를 `200`으로 보내야 성공으로 간주한다.
-  * `2xx`외의 `HTTP Status`를 전달시 `톡톡`에서 실패로 간주하고 에러를 로깅 한다.
-* 만약 이벤트에 대해 자동반응 메시지를 보내고 싶다면 `헤더(Header)`에 `Content-Type: application/json;charset=UTF-8`를 포함하고 `body`에 전달하고자하는 이벤트를 추가한다.
-  * 이때 `user`속성은 무시되고 이벤트를 보냈던 유저에게 이벤트가 전달된다.
-* 유저의 메시지에 봇이 회신하는 형태는 동기식/비동기식 메시지 전송이 있다.
-  * 동기식은 유저의 메시지 이벤트에 응답을 줄때 곧바로 응답메시지를 함께 주는 방법이다.
-  * 비동기식은 유저의 메시지 이벤트를 일단 받아 바로 응답하고(`200 OK`), 좀 이따 `보내기 API`를 이용하여 톡톡에 직접 이벤트를 전송하는 방법이다.
-  * 동기식 메시지 전송은 단건응답이거나 5초이내에 결과메시지를 전송할 수 있는경우 이용하면 좋다.
-  * 비동기식 메시지는 여러건의 메시지로 응답을 줘야하거나 곧바로 결과를 전송할 수 없어서 일정시간 대기후 메시지를 전송할때 사용할 수 있다.
+
+* 챗봇에서 이벤트전달에 대한 응답으로 `HTTP Status`를 `200`으로 보내야 성공으로 간주합니다.
+  * `200`외 `HTTP Status`를 전달시 `톡톡`에서 실패로 간주하고 에러를 로깅합니다.
+* 만약 이벤트에 대해 자동반응 메시지를 보내고 싶다면 `Header`에 `Content-Type: application/json;charset=UTF-8`를 포함하고 `body`에 전달하고자하는 이벤트를 추가합니다.
+  * 이때 `user`속성은 무시되고 이벤트를 보냈던 유저에게 이벤트가 전달됩니다.
+
+> **[사용팁]**
+유저의 메시지에 챗봇이 회신하는 형태는 동기식/비동기식 메시지 전송이 있습니다.
+> * 동기식은 유저의 메시지 이벤트에 응답을 줄때 곧바로 응답메시지를 함께 주는 방법입니다.
+> * 비동기식은 유저의 메시지 이벤트를 일단 받아 바로 응답하고(`200 OK`), 좀 이따 `보내기 API`를 이용하여 톡톡에 직접 이벤트를 전송하는 방법입니다.
+> * 동기식 메시지 전송은 단건응답이거나 5초이내에 결과메시지를 전송할 수 있는경우 이용하면 좋습니다.
+> * 비동기식 메시지는 여러건의 메시지로 응답을 줘야하거나 곧바로 결과를 전송할 수 없어서 일정시간 대기후 메시지를 전송할때 사용할 수 있습니다.
 <br>
 <br>
 
