@@ -494,19 +494,20 @@ Content-Type: application/json;charset=UTF-8
 <br>
 <br>
 
-### compositeContent
+### `compositeContent`
 
-<img src="composite_message.jpg" />
+![composite_message](/composite_message.jpg)
 
-* `compositeContent` 는 여러 형태의 `구성요소`를 복합적으로 사용할 수 있는 메시지이다.
-* 하나의 `composite`은 아래의 `구성요소`를 포함할 수 있다.
-* `image`: 한 개의 이미지를 노출하는 `이미지` 요소
-  * `elementList`: 타이틀+설명1+설명2+버튼+썸네일로 구성할 수 있는 `리스트` 요소
-  * `title` : 조금 두꺼운 글자로 표현되는 `타이틀` 요소
-  * `description` : `title`보다 조금 흐린 글자로 표현되는 `설명` 요소
-  * `buttonList`: 다양한 기능을 가진 `버튼` 요소의 리스트
-* `compositeContent`에 `composite`을 두 개 이상 넣어서 `캐로셀(Carousel)`을 구성할 수 있다.
-* `구성요소`의 노출 순서는 변경할 수 없다.
+* `compositeContent`는 여러 형태의 `구성요소`를 복합적으로 사용할 수 있는 메시지 입니다.
+* 하나의 `composite`은 아래의 `구성요소`를 포함할 수 있습니다.
+  * `image`: 한 개의 이미지를 노출하는 `이미지` 요소
+  * `elementList`: `타이틀`+`설명1`+`설명2`+`버튼`+`썸네일`로 구성할 수 있는 `리스트` 요소
+  * `title`: 조금 두꺼운 글자로 표현되는 `타이틀` 요소
+  * `description`: `title`보다 흐린 글자로 표현되는 `설명` 요소
+  * `buttonList`: 다양한 기능을 가진 `버튼` 요소 리스트
+* `compositeContent`에 `composite`을 두 개 이상 넣어서 `캐로셀(Carousel)`를 구성할 수 있습니다.
+* `구성요소`의 노출 순서는 변경할 수 없습니다.
+<br>
 
 [모든 `구성요소`를 포함한 사용 예]
 ```javascript
@@ -593,17 +594,20 @@ Content-Type: application/json;charset=UTF-8
     }
 }
 ```
+<br>
 
-#### CompositeContent object
+#### `CompositeContent` object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
 | `compositeList` | Composite[] | Y |  |
-> **[주의사항]**<br>
-> * `compositeList`에는 `Composite`을 최대 10개까지 넣을 수 있다.
-> * `compositeList`에 넣는 `Composite`은 null일 수 없다.
 
-#### Composite object
+> **[주의사항]**<br>
+> * `compositeList`에는 `Composite`을 최대 10개까지 넣을 수 있습니다.
+> * `compositeList`에 넣는 `Composite`은 `null`일 수 없습니다.
+<br>
+
+#### `Composite` object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -612,22 +616,25 @@ Content-Type: application/json;charset=UTF-8
 | `image` | Image | N | `이미지` 요소 |
 | `elementList` | ElementList | N | `요소 리스트` |
 | `buttonList` | Button[] | N | `버튼` 요소 리스트 |
-> **[주의사항]**<br>
-> * 하나의 `composite`에는 `title`, `description`, `elementList` 중 하나는 반드시 존재해야 한다.
-> * 하나의 `composite`에는 최소한 두 개의 요소가 존재해야 한다.
-> * `title` 최대 길이는 200자이다.
-> * `description` 최대 길이는 1000자이다.
-> * `title`과 `description`에 줄바꿈이 필요하면 `\n`를 삽입한다.
-> * `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있다.
-> * `buttonList`에 넣는 `버튼`은 null일 수 없다.
 
-#### Image object
+> **[주의사항]**<br>
+> * 하나의 `composite`에는 `title`, `description`, `elementList` 중 하나는 반드시 존재해야 합니다.
+> * 하나의 `composite`에는 최소한 두 개의 요소가 존재해야 합니다.
+> * `title` 최대 길이는 200자 입니다.
+> * `description` 최대 길이는 1000자 입니다.
+> * `title`과 `description`에 줄바꿈이 필요하면 `\n`를 삽입합니다.
+> * `buttonList`에는 `버튼`을 최대 10개까지 넣을 수 있습니다.
+> * `buttonList`에 넣는 `버튼`은 `null`일 수 없습니다.
+<br>
+
+#### `Image` object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
 | `imageUrl` | String | Y | 이미지 URL |
+
 > **[주의사항]**<br>
-> * 권장 이미지 사이즈는 가로 530px, 세로 290px 이다. (비율 1.82:1)
+> * 권장 이미지 사이즈는 가로 530px, 세로 290px 입니다. (비율 1.82:1)
 > * 지원포맷 : jpg, png
 > * 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일하다.
 
