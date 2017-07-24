@@ -444,7 +444,7 @@ Content-Type: application/json;charset=UTF-8
 >   * 그러나 `(1)`, `(2)`에 해당하지 않으면서 `배송출발` 또는 `예약완료`처럼 특정 사건에의해 챗봇이 이벤트를 보내야한다면 `notification` 사용을 권장합니다.
 <br>
 
-## 메시지 데이터 명세
+## 메시지 타입 명세서
 <br>
 
 ### `textContent`
@@ -805,14 +805,16 @@ Content-Type: application/json;charset=UTF-8
 <br>
 
 ### 퀵버튼
-<img src="btn_quick.jpg">
 
-* `compositeContent`의 `OPTION`타입 버튼과 유사한 기능을 `textContent`와 `imageContent`에도 지원한다. 
-* 메시지를 전송하면 채팅창 하단에 `버튼`이 나열된다.
-* `TEXT`, `LINK`, `PAY` 타입의 버튼이 허용된다.
-* 버튼 `title`의 글자 수는 10자로 제한된다.
+![btn_quick](/btn_quick.jpg)
 
-#### textContent에 퀵버튼 적용
+* `compositeContent`의 `OPTION`타입 버튼과 유사한 기능이 `textContent`와 `imageContent`에도 제공되고 있습니다.
+* 메시지를 전송하면 채팅창 하단에 `버튼`이 나열됩니다.
+* `TEXT`, `LINK`, `PAY` 타입 버튼을 사용할 수 있습니다.
+* 버튼 `title`의 글자 수는 10자로 제한됩니다.
+<br>
+
+#### `textContent`에 퀵버튼 적용
 ```javascript
 {
     "event": "send",
@@ -821,11 +823,11 @@ Content-Type: application/json;charset=UTF-8
     "textContent": {
         "text": "텍스트",
         "code": "코드",
-        "quickReply" : { /* 퀵버튼 - 빠른응답 */
-            "buttonList" : [ /* 버튼 리스트 */
+        "quickReply": { /* 퀵버튼 - 빠른응답 */
+            "buttonList": [ /* 버튼 리스트 */
                 {
-                    "type" : "TEXT", /* TEXT, LINK, PAY 타입의 버튼이 허용된다. */
-                    "data" : {
+                    "type": "TEXT", /* TEXT, LINK, PAY 타입의 버튼이 허용된다. */
+                    "data": {
                         /* 버튼 데이터 */
                     }
                 }
@@ -834,8 +836,9 @@ Content-Type: application/json;charset=UTF-8
     }
 }
 ```
+<br>
 
-#### imageContent에 퀵버튼 적용
+#### `imageContent`에 퀵버튼 적용
 ```javascript
 {
     "event": "send",
@@ -843,11 +846,11 @@ Content-Type: application/json;charset=UTF-8
     
     "imageContent": {
         "imageUrl": "http://blogfiles5.naver.net/20130918_119/city0080_137946683395507ioT_JPEG/6.jpg", /* 전송하고자하는 이미지 URL */
-        "quickReply" : { /* 퀵버튼 - 빠른응답 */
-            "buttonList" : [ /* 버튼 리스트 */
+        "quickReply": { /* 퀵버튼 - 빠른응답 */
+            "buttonList": [ /* 버튼 리스트 */
                 {
-                    "type" : "TEXT",
-                    "data" : {
+                    "type": "TEXT",
+                    "data": {
                         /* 버튼 데이터 */
                     }
                 }
@@ -856,8 +859,9 @@ Content-Type: application/json;charset=UTF-8
     }
 }
 ```
+<br>
 
-#### compositeContent에 퀵버튼 적용
+#### `compositeContent`에 퀵버튼 적용
 ```javascript
 {
     "event": "send",
@@ -867,11 +871,11 @@ Content-Type: application/json;charset=UTF-8
         "compositeList": [
             /* composite 데이터 */
         ],
-        "quickReply" : {
-            "buttonList" : [
+        "quickReply": {
+            "buttonList": [
                 {
-                    "type" : "TEXT",
-                    "data" : {
+                    "type": "TEXT",
+                    "data": {
                         /* 버튼 데이터 */
                     }
                 }
@@ -880,6 +884,7 @@ Content-Type: application/json;charset=UTF-8
     }
 }
 ```
+<br>
 
 ## ERROR 명세서
 
