@@ -379,7 +379,7 @@ Content-Type: application/json;charset=UTF-8
     "user": "al-2eGuGr5WQOnco1_V-FQ"
 }
 ```
-> **[사용팁]**<br>
+> **[사용팁]**
 > * `leave` 이벤트의 `Response`에 `request`를 넣어도 메시지가 전송되지않고 항상 무시됩니다.
 > * `leave` 이벤트는 일반 메신저 경험처럼 `채팅창`을 나간것으로 `채팅리스트`에는 존재하지 않지만, 챗봇이 유저에게 다시 메시지를 보낸다면 소환됩니다.
 > * `leave` 이벤트를 통해 챗봇이 유저에게 적극적으로 이후 메시지를 보낼것인지 아니면 이쯤에서 더 이상 대화를 하지 않을것인지 선택할 수 있습니다.
@@ -480,7 +480,7 @@ Content-Type: application/json;charset=UTF-8
     }
 }
 ```
-> **[사용팁]**<br>
+> **[사용팁]**
 > * `imageUrl`는 외부에서도 접근가능한 URL이여야 합니다. 만약 사내에서만 접근가능한 URL이면 전송에 실패하게 됩니다.
 > * 주어진 URL로 `톡톡서버`가 접근해서 이미지 다운로드 받을때 `HTTP` 응답 헤더 `Content-Type` 값은 반드시 해당 이미지 유형과 일치해야 합니다.
 > * `imageContent`를 톡톡에 전송하게 되면 (1)`톡톡서버`는 해당 URL로 1회접근하여 이미지를 다운로드 받습니다. (2)다운로드받은 이미지는 톡톡에 보관되고 톡톡용 이미지URL로 `유저`에게 이미지를 노출합니다. 
@@ -602,7 +602,7 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `compositeList` | Composite[] | Y |  |
 
-> **[주의사항]**<br>
+> **[주의사항]**
 > * `compositeList`에는 `Composite`을 최대 10개까지 넣을 수 있습니다.
 > * `compositeList`에 넣는 `Composite`은 `null`일 수 없습니다.
 <br>
@@ -617,7 +617,7 @@ Content-Type: application/json;charset=UTF-8
 | `elementList` | ElementList | N | `요소 리스트` |
 | `buttonList` | Button[] | N | `버튼` 요소 리스트 |
 
-> **[주의사항]**<br>
+> **[주의사항]**
 > * 하나의 `composite`에는 `title`, `description`, `elementList` 중 하나는 반드시 존재해야 합니다.
 > * 하나의 `composite`에는 최소한 두 개의 요소가 존재해야 합니다.
 > * `title` 최대 길이는 200자 입니다.
@@ -633,22 +633,25 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `imageUrl` | String | Y | 이미지 URL |
 
-> **[주의사항]**<br>
+> **[주의사항]**
 > * 권장 이미지 사이즈는 가로 530px, 세로 290px 입니다. (비율 1.82:1)
-> * 지원포맷 : jpg, png
-> * 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일하다.
+> * 지원포맷 : JPG, JPEG, PNG, GIF
+> * 위에서 설명한 [imageContent](#imagecontent)의 사용방법과 성능향상을 위한 팁이 동일합니다.
+<br>
 
-#### ElementList object
+#### `ElementList` object
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
 | `type` | string | Y | 리스트 요소의 타입. 현재는 `LIST` 타입만 존재 |
 | `data` | ElementData[] | Y | 리스트 요소의 데이터 |
-> **[주의사항]**<br>
-> * `data`에는 `ElementData`를 최대 3개까지 넣을 수 있다.
-> * `data`에 넣는 `ElementData`는 null일 수 없다.
 
-#### ElementData object (`LIST` 타입)
+> **[주의사항]**
+> * `data`에는 `ElementData`를 최대 3개까지 넣을 수 있습니다.
+> * `data`에 넣는 `ElementData`는 `null`일 수 없습니다.
+<br>
+
+#### `ElementData` object (`LIST` 타입)
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
@@ -657,14 +660,19 @@ Content-Type: application/json;charset=UTF-8
 | `subDescription` | string | N | `설명2` |
 | `image` | Image | Y | `이미지` |
 | `button` | Button | N | `버튼` |
-> **[주의사항]**<br>
-> * `title` 최대 길이는 N자이다. `title`은 1줄로 노출된다.
-> * `description` 최대 길이는 N자이다.
->   * 줄바꿈이 필요하면 `\n`를 삽입한다. `description`은 최대 2줄 노출된다.
-> * `subDescription` 최대 길이는 N자이다. `subDescription`은 1줄로 노출된다.
-> * `버튼`은 `TEXT`와 `LINK` 타입만 허용되며, `title` 길이는 4자로 제한된다.
 
-#### Button object
+> **[주의사항]**
+> * `title` 최대 길이는 ?자입니다.
+>   * `title`은 1줄로 노출됩니다.
+> * `description` 최대 길이는 ?자입니다.
+>   * 줄바꿈이 필요하면 `\n`를 삽입합니다.
+>   * `description`은 최대 2줄 노출됩니다.
+> * `subDescription` 최대 길이는 N자입니다.
+>   * `subDescription`은 1줄로 노출됩니다.
+> * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 4자로 제한됩니다.
+<br>
+
+##### `Button` object
 ```javascript
 {
     "type": "버튼타입",
@@ -678,14 +686,15 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `type` | string | Y | `버튼` 요소의 타입. `TEXT`, `LINK`, `OPTION`, `PAY` |
 | `data` | ButtonData | Y | `버튼` 요소의 데이터 |
+<br>
 
-#### ButtonData object (`TEXT` 타입)
+#### `ButtonData` object (`TEXT` 타입)
 ```javascript
 {
     "type": "TEXT",
     "data": {
-        "title" : "타이틀",
-        "code" : "코드"
+        "title": "타이틀",
+        "code": "코드"
     }
 }
 ```
@@ -694,18 +703,20 @@ Content-Type: application/json;charset=UTF-8
 |:---:|:----:|:----:|------|
 | `title` | string | Y | `버튼`에 노출되는 텍스트. `유저`가 버튼을 클릭하면 전송되는 `텍스트` |
 | `code` | string | N | `유저`가 버튼을 클릭하면 전송되는 `코드` |
-> **[주의사항]**<br>
-> * `title`의 최대 길이는 18자이다.
-> * `code`의 최대 길이는 1000자이다.
 
-#### ButtonData object (`LINK` 타입)
+> **[주의사항]**
+> * `title`의 최대 길이는 18자입니다.
+> * `code`의 최대 길이는 1,000자입니다.
+<br>
+
+#### `ButtonData` object (`LINK` 타입)
 ```javascript
 {
     "type": "LINK",
     "data": {
-        "title" : "버튼에 노출되는 텍스트",
-        "url" : "http://your-pc-url.com",
-        "mobileUrl" : "http://your-mobile-url.com"
+        "title": "버튼에 노출되는 텍스트",
+        "url": "http://your-pc-url.com",
+        "mobileUrl": "http://your-mobile-url.com"
     }
 }
 ```
@@ -715,8 +726,9 @@ Content-Type: application/json;charset=UTF-8
 | `title` | string | Y | `버튼`에 노출되는 텍스트 |
 | `url` | string | Y | PC버전 채팅창에서 `버튼`을 클릭하면 이동할 페이지 URL |
 | `mobileUrl` | string | Y | 모바일 버전 채팅창에서 `버튼`을 클릭하면 이동할 페이지 URL |
-> **[주의사항]**<br>
-> * `title`의 최대 길이는 18자이다.
+
+> **[주의사항]**
+> * `title`의 최대 길이는 18자입니다.
 > * 모바일 채팅창에서는 `현재 창`에서 링크를 열고 PC에서는 `새 창`으로 링크를 연다.
 > * 모바일에서 `현재 창`으로 이동한 페이지에서 다시 채팅창으로 돌아올 때는 반드시 `뒤로가기` `history.back()`을 이용한다.
 
