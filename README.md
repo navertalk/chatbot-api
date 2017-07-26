@@ -673,14 +673,14 @@ Content-Type: application/json;charset=UTF-8
 | `button` | Button | N | `버튼` |
 
 > **[주의사항]**
-> * `title` 최대 길이는 ?자 입니다.
->   * `title`은 1줄로 노출됩니다.
-> * `description` 최대 길이는 ?자 입니다.
+> * `title` 모바일(해상도 375, 아이폰6s) 기준 최대 10자까지 노출되고 그 이상은 줄임표시(...)됩니다. 
+>   * `title`은 1줄로 노출됩니다.
+> * `description` 모바일(해상도 375, 아이폰6s) 기준 최대 25자까지 노출되고 그 이상은 줄임표시(...)됩니다. 
 >   * 줄바꿈이 필요하면 `\n`를 삽입합니다.
 >   * `description`은 최대 2줄 노출됩니다.
-> * `subDescription` 최대 길이는 ?자 입니다.
+> * `subDescription`모바일(해상도 375, 아이폰6s) 기준 최대 13자까지 노출되고 그 이상은 줄임표시(...)됩니다. 
 >   * `subDescription`은 1줄로 노출됩니다.
-> * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 4자로 제한됩니다.
+> * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 10자로 제한됩니다.
 <br>
 
 #### `Button` Object
