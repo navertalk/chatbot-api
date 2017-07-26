@@ -669,10 +669,11 @@ Content-Type: application/json;charset=UTF-8
 | `title` | string | Y | `타이틀` |
 | `description` | string | N | `설명1` |
 | `subDescription` | string | N | `설명2` |
-| `image` | Image | Y | `이미지` |
+| `image` | Image | N | `이미지` |
 | `button` | Button | N | `버튼` |
 
 > **[주의사항]**
+> * `title`, `description`, `subDescription`은 최대 100자까지 입력할 수 있습니다.
 > * `title` 모바일(해상도 375, 아이폰6s) 기준 최대 10자까지 노출되고 그 이상은 줄임표시(...)됩니다.
 >   * `title`은 1줄로 노출됩니다.
 > * `description` 모바일(해상도 375, 아이폰6s) 기준 최대 25자까지 노출되고 그 이상은 줄임표시(...)됩니다. 
@@ -681,6 +682,7 @@ Content-Type: application/json;charset=UTF-8
 > * `subDescription`모바일(해상도 375, 아이폰6s) 기준 최대 13자까지 노출되고 그 이상은 줄임표시(...)됩니다. 
 >   * `subDescription`은 1줄로 노출됩니다.
 > * `버튼`은 `TEXT`와 `LINK`타입만 허용되며 `title`길이는 10자로 제한됩니다.
+> * `image`를 입력안하면 기본 이미지가 노출됩니다.
 <br>
 
 #### `Button` Object
