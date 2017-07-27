@@ -104,7 +104,7 @@ public class BotApplication {
 
 #### 2. localhost에서 접근 테스트를 합니다.
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{ "event": "test" }' "http://localhost:8080/"
+curl -X POST -H "Content-Type: application/json;charset=UTF-8" -d '{ "event": "test" }' "http://localhost:8080/"
 ```
 * localhost에서 테스트 후 정식 인증서를 사용하여 https://your.domain/ 으로 접근이 가능 해야합니다.
 <br>
@@ -250,7 +250,7 @@ app.listen(8080);
 [`request`]
 ```bash
 curl -X POST \
-    -H "Content-Type: application/json" \
+    -H "Content-Type: application/json;charset=UTF-8" \
     -H "Authorization: ct_wc8b1i_Pb1AXDQ0RZWuCccpzdNL" \
     -d '{ "event": "send", "user": "al-2eGuGr5WQOnco1_V-FQ", "textContent": { "text": "hello world" } }' \
     "https://gw.talk.naver.com/chatbot/v1/event"
@@ -283,6 +283,7 @@ HTTP/1.1 200 OK
 POST / HTTP/1.1
 Host: your.bot.co.kr
 Accept: application/json
+Content-Type: application/json;charset=UTF-8
 
 {
     "event": "", /* 이벤트명 */
@@ -904,6 +905,7 @@ Content-Type: application/json;charset=UTF-8
 [Error 예제]
 ```javascript
 HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 
 {
   "success": false,
