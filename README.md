@@ -90,7 +90,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 public class BotApplication {
 
-	@PostMapping(value = "/", produces = "application/json")
+	@PostMapping
 	public void event(@RequestBody String body) {
 		System.out.println(body);
 	}
