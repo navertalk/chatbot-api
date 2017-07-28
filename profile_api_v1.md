@@ -115,7 +115,7 @@ Content-Type: application/json;charset=UTF-8
 * 톡톡은 유저마다 최대 5개의 주소를 보관하고 있습니다.
 * `address` 정보 요청시 모든 주소리스트가 제공 되는것이 아니라 요청 시점에서 유저가 선택한 주소지 한개가 전달되는 것 입니다.
 * 배달과 관련있는 챗봇이라면 한번 얻은 주소를 사용하지 마시고 매번 `address` 정보를 요청하여 현재 시점에 유저가 원하는 주소를 가져가 사용하셔야 합니다.
-* 제공되는 `address` 속성명은 (행정안전부 주소 서비스)[https://www.juso.go.kr/CommonPageLink.do?link=/addrlink/devAddrLinkRequestSample]를 따릅니다.
+* 제공되는 `address` 속성명은 [행정안전부 주소 서비스](https://www.juso.go.kr/CommonPageLink.do?link=/addrlink/devAddrLinkRequestSample)를 따릅니다.
 * 주소의 위치를 나타내는 좌표계는 `위도경도` 입니다. 네이버 지도 API와 연동될 수 있는 좌표계입니다.
 * 주소는 `신주소`만 제공됩니다.
 <br>
