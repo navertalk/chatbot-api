@@ -27,6 +27,8 @@
     * [컴포지트 메시지 사용 가이드](#컴포지트-메시지-사용-가이드)
   * [퀵버튼](#퀵버튼)
 * [ERROR 명세서](#error-명세서)
+* 확장 API
+  * [Profile API V1](/profile_api_v1.md)
 <br>
 <br>
 
