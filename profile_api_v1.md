@@ -1,4 +1,4 @@
-# **Profile API** V1 **(작업중)**
+# **Profile API** V1
 
 ## 개요
 * `Profile API`는 [`Chat Bot API`](/README.md)의 확장 API이며 네이버 회원 정보를 요청할 수 있습니다.
