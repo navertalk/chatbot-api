@@ -29,6 +29,7 @@
 * [ERROR 명세서](#error-명세서)
 * 확장 API
   * [Profile API V1](/profile_api_v1.md)
+  * [Pay API V1](/pay_api_v1.md)
 <br>
 <br>
 
@@ -92,14 +93,14 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 public class BotApplication {
 
-	@PostMapping
-	public void event(@RequestBody String body) {
-		System.out.println(body);
-	}
+  @PostMapping
+  public void event(@RequestBody String body) {
+    System.out.println(body);
+  }
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(BotApplication.class, args);
-	}
+  public static void main(String[] args) throws Exception {
+    SpringApplication.run(BotApplication.class, args);
+  }
 }
 ```
 <br>
