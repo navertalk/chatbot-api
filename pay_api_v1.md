@@ -25,13 +25,14 @@
 {
     "event": "pay_complete",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
-    "paymentResult": { /* 결제 결과 정보 */
-        "code" : "Success", /* 네이버페이 결제 결과 코드 */
-        "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
-        "merchantPayKey" : "bot-custom-pay-key-1234", /* PAY 버튼 데이터로 지정한 커스텀 결제 식별값 */
-        "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ",/* PAY 버튼 데이터로 지정한 커스텀 결제 유저 식별값 */
+    "options": {
+        "paymentResult": { /* 결제 결과 정보 */
+            "code" : "Success", /* 네이버페이 결제 결과 코드 */
+            "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
+            "merchantPayKey" : "bot-custom-pay-key-1234", /* PAY 버튼 데이터로 지정한 커스텀 결제 식별값 */
+            "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ",/* PAY 버튼 데이터로 지정한 커스텀 결제 유저 식별값 */
+	}
     }
-
 }
 ```
 
@@ -40,11 +41,13 @@
 {
     "event": "pay_complete",
     "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
-    "paymentResult": { /* 네이버페이 간편결제 결과정보 */
-        "code" : "Fail", /* 네이버페이 간편결제 결제창호출 결과코드 */
-        "message" : "OwnerAuthFail", /* 네이버페이 간편결제 결제창호출 결과메시지 */
-        "merchantPayKey" : "bot-custom-pay-key-1234", /* 판매자 결제 식별값 */
-        "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ" /* 판매자 유저 식별값 */
+    "options": {
+        "paymentResult": { /* 네이버페이 간편결제 결과정보 */
+            "code" : "Fail", /* 네이버페이 간편결제 결제창호출 결과코드 */
+            "message" : "OwnerAuthFail", /* 네이버페이 간편결제 결제창호출 결과메시지 */
+            "merchantPayKey" : "bot-custom-pay-key-1234", /* 판매자 결제 식별값 */
+            "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ" /* 판매자 유저 식별값 */
+	}
     }
 }
 ```
@@ -128,7 +131,7 @@ app.post('/', (req, res) => {
     // 네이버페이 결제창에서 결제가 완료되어 이벤트가 발생
     if (req.body.event == 'pay_complete') {
         // 상품의 재고여부를 확인하여 결제승인을 결정한다.
-        if (hasStock(req.body.paymentResult.merchantPayKey)) {
+        if (hasStock(req.body.options.paymentResult.merchantPayKey)) {
             res.status(200).json({
                 "event": "send",
                 "textContent": {
