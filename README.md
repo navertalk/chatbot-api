@@ -427,6 +427,7 @@ Content-Type: application/json;charset=UTF-8
   * `textContent`: 텍스트 메시지
   * `imageContent`: 단수 이미지로 구성된 메시지
   * `compositeContent`: 텍스트와 이미지 그리고 버튼을 포함하는 복합 메시지
+* 이모티콘, 상담요청은 `send` 이벤트이지만 아무런 메시지 없이 전송됩니다(포함되지 않음)
 <br>
 
 #### `send` 이벤트 구조
