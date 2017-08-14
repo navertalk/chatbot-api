@@ -143,7 +143,8 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -d '{ "event": "t
       "event": "send",
       "user": "al-2eGuGr5WQOnco1_V-FQ",
       "textContent": {
-          "text": "hello world"
+          "text": "hello world",
+          "inputType": "typing"
       }
     }
     ```
@@ -470,7 +471,8 @@ Content-Type: application/json;charset=UTF-8
     
     "textContent": {
         "text": "안녕하세요? 도미노피자 주문 챗봇입니다. 6가지 인기메뉴를 빠르게 주문해보세요!", /* 채팅창에 노출할 텍스트 */
-        "code": "" /* compositeContent 에서 버튼클릭시 전달받는 코드값, code는 채팅에 노출되지않는다. */
+        "code": "", /* compositeContent 에서 버튼클릭시 전달받는 코드값, code는 채팅에 노출되지 않습니다. */
+        "inputType": "typing|button|sticker|inquiry|vphone" /* 수신시에만 받는 속성으로, 사용자가 어떤 매개체로 봇에게 입력하는지를 나타내는 값입니다. */
     }
 }
 ```
@@ -481,7 +483,15 @@ Content-Type: application/json;charset=UTF-8
 > * 텍스트에 `https://talk.naver.com/`처럼 URL이 삽입된경우 자동으로 Anchor Tag(`<a>`)로 변환하여 노출해 줍니다.
 > * 텍스트의 최대길이는 영문/한글 구분없이 1만자이내로 전송 해야합니다.
 > * `code`는 `compositeContent`에 내장된 버튼 클릭시 어떤 버튼을 눌렀는지 확인하는 용도로 활용할 수 있습니다.
-> * `compositeContent` 전송시 두개의 버튼에 각각 `A`와 `B`코드를 넣었다면, 유저가 버튼클릭시 `code`값을 확인하여 어떤 버튼을 눌렀는지 확인할 수 있습니다.
+> * `compositeContent` 전송시 두개의 버튼에 각각 `A`와 `B`코드를 넣었다면, 유저가 버튼클릭시 `code`값을 확인하여 어떤 버튼을 눌렀는지 확인할 수 있습니다.<br>
+
+> **[inputType 정보]**<br>
+> * typing : 유저가 직접 입력창에 적고 `보내기`버튼으로 보낸 경우입니다.
+> * button : 봇에서 보낸 여러 형태의 버튼을 직접 눌러서 응답한 경우입니다. `code`값이 같이 포함됩니다.
+> * sticker : 스티커를 눌러서 전송한 경우입니다. 사용자가 스티커를 눌렀을 때 응답을 하실 수 있습니다.
+> * inquiry : 우측 상단의 상담요청 레이어를 통해서, `상담 요청하기` 버튼을 누른 경우입니다.
+> * vphone : 스티커 버튼의 우측에 위치한 `안심전화번호로 상담요청하기` 버튼을 누른 경우입니다. 안심전화번호와 해당 전화번호의 유효기간(yyyy-MM-dd 형태)이 제공됩니다.
+>   * 예 : {"text":"050719003814,2017-11-03", "inputType":"vphone"}
 <br>
 
 ### `imageContent`
