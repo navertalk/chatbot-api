@@ -69,7 +69,7 @@
 
 #### `PaymentInfo` 오브젝트
 
-`paymentInfo` 필드와 네이버페이 간편결제 결제예약API 파라메터는 1:1로 대응합니다: [네이버페이 간편결제 결제예약 API 뮨서](https://developer.pay.naver.com/docs/api/payments#payments_reserve)
+`paymentInfo` 필드와 네이버페이 간편결제 결제예약API 파라메터는 1:1로 대응합니다: [네이버페이 간편결제 결제예약 API 문서](https://developer.pay.naver.com/docs/api/payments#payments_reserve) <br>
 그러나 아래와 같은 몇 개의 차이가 있습니다.
 
 * `modelVersion` 필드 제거 : 톡톡 결제 버튼은 model2 결제방식만을 지원하므로 해당값을 지정할 수 없습니다.
