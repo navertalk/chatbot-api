@@ -59,7 +59,56 @@
 
 `PAY` 타입 버튼은 네이버페이 간편결제창 호출을 위한 버튼으로써, [compsiteContent](./README.md#compositecontent-object)에 넣을 수 있습니다.
 
-### compositeContent
+### `compositeContent`
+
+##### `ButtonData` Object (`PAY` 타입)
+
+| 필드 | 타입 | 필수 | 설명 |
+|----|----|----|----|
+|data|`PaymentInfo`|true|네이버페이 간편결제 결제예약 파라메터|
+
+#### `PaymentInfo` 오브젝트
+
+`paymentInfo` 필드와 네이버페이 간편결제 결제예약API 파라메터는 1:1로 대응합니다: [네이버페이 간편결제 결제예약 API 뮨서](https://developer.pay.naver.com/docs/api/payments#payments_reserve)
+그러나 아래와 같은 몇 개의 차이가 있습니다.
+
+* `modelVersion` 필드 제거 : 톡톡 결제 버튼은 model2 결제방식만을 지원하므로 해당값을 지정할 수 없습니다.
+* `productName` 필드 필수 -> 선택 : 생략시 `productItems`의 첫번째 엘리멘트의 `name` 필드로 대치합니다.
+* `productName` 필드 필수 -> 선택 : 생략시 `productItems` 각 엘리먼트의 `count`의 총 합으로 대치합니다.
+* `taxScopeAmount` 필드 필수 -> 선택 : 생략시 `totalPayAmount` 값으로 대치합니다. 따라서 전체 결제금액이 과세대상금액이 됩니다.
+* `taxExScopeAmount` 필드 필수 -> 선택 : 생략시 `totalPayAmount` - `taxScopeAmount` 값으로 대치합니다.
+* `merchantUserKey` 필드 필수 -> 선택 : 생략시 네이버톡톡 챗봇 `user`값으로 대치합니다. 챗봇 유저와 결제자 정보를 매핑할 수 있으므로 유용합니다.
+* `webhookUrl` 필드 제거 : 네이버톡톡 챗봇 결제에서 지원하지 않습니다.
+* `returnUrl` 필드 제거 : 네이버톡톡 챗봇 결제에서 지원하지 않습니다. 결제 최종승인 핸들링을 위해서는 [pay_complete 이벤트](#pay_complete-이벤트) 항목을 참고하십시오.
+
+| key | type | 필수 | 설명 |
+|----|-----|----|----|
+|merchantPayKey|string|true|가맹점 주문내역 확인 가능한 가맹점 결제번호 또는 주문번호를 전달해야 합니다.|
+|merchantUserKey|string|false|가맹점의 사용자 키(개인 아이디와 같은 개인정보 데이터는 제외하여 전달해야 합니다). 기본값은 네이버톡톡 챗봇 유저키|
+|productName|string|false|대표 상품명. 예: 장미의 이름 외 1건(X), 장미의 이름(O)|
+|productCount|number|false|상품 수량 예: A 상품 2개 + B 상품 1개의 경우 productCount 3으로 전달|
+|totalPayAmount|number|true|총 결제 금액. 최소 결제금액은 100원|
+|deliveryFee|number|false|배송비. 기본값 0|
+|taxScopeAmount|number|false|과세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액|
+|taxExScopeAmount|number|false|면세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액|
+|purchaserName|string|false|구매자 성명. 결제 상품이 보험인 경우에만 필수 값입니다. 그 외에는 전달할 필요가 없습니다.|
+|purchaserBirthday|string|false|구매자 생년월일(yyyymmdd). 결제 상품이 보험인 경우에만 필수 값입니다. 그 외에는 전달할 필요가 없습니다.|
+|productItems|`ProductItem`[]|true|productItem 배열|
+
+#### `ProductItem` 오브젝트
+
+`ProductItem` 오브젝트와 네이버페이 간편결제 결제예약API 파라메터 `productItems`의 엘리멘트는 1:1로 대응합니다.
+
+| key | type | 필수 | 설명 |
+|----|-----|----|----|
+|categoryType|string|true|결제 상품 유형. 유형 상세 정보는 페이 개발가이드를 참고하십시오.|
+|categoryId|string|true|결제 상품 유형 아이디. 유형 아이디 상세 정보는 페이 개발가이드를 참고하십시오.|
+|uid|string|true|상품 고유 아이디|
+|name|string|true|상품명|
+|startDate|string|false|시작일(yyyyMMdd). 예: 20160701 결제 상품이 공연, 영화, 보험, 여행, 항공, 숙박인 경우 입력을 권장합니다. |
+|endDate|string|false|종료일(yyyyMMdd). 예: 20160701 결제 상품이 공연, 영화, 보험, 여행, 항공, 숙박인 경우 입력을 권장합니다. |
+|sellerId|string|true|파트너 사에서 하위 판매자를 식별하기 위해 사용하는 식별키를 전달 합니다. ( 영대소문자 및 숫자만 허용 ) |
+|count|number|false|결제 상품 개수. 기본값 1|
 
 [`PAY` 타입 버튼 사용예]
 ```javascript
