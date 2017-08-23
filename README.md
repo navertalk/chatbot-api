@@ -30,6 +30,7 @@
 * 확장 API
   * [Profile API V1](/profile_api_v1.md)
   * [Pay API V1](/pay_api_v1.md)
+  * [Image Upload API V1](/imageupload_api_v1.md)
 <br>
 <br>
 
@@ -204,9 +205,15 @@ app.post('/', (req, res) => {
           res.json(response);
           break;
 
-        // 유입경로가 없거나 화면을 갱신하였을때
-        case 'none' :
-          response.textContent.text = '화면을 갱신하셨네요.';
+        // 링크로부터 인입되었을때
+        case 'button' :
+          response.textContent.text = '버튼을 눌러서 방문하셨네요.';
+          res.json(response);
+          break;
+
+        // 유입경로가 없을때
+        case 'none' :
+          response.textContent.text = '방문을 환영합니다.';
           res.json(response);
           break;
 
@@ -374,7 +381,7 @@ Content-Type: application/json;charset=UTF-8
     }
 ```
 
-[브라우저 주소줄에 URL를 직접입력하거나 새로고침을 통해 유입된 경우 `options`]
+[브라우저 주소줄에 URL를 직접입력하여 유입된 경우 `options`]
 ```javascript
     "options": {
         "inflow": "none"
@@ -516,6 +523,11 @@ Content-Type: application/json;charset=UTF-8
 >   * `바탕투명` 또는 `움직이는이미지` 모두 채팅창에서 표현이 가능합니다.
 > * `imageContent`를 톡톡으로 전송할때 문제가 발생되었다면 이미지 처리에대한 `imageContent Error 코드표`을 참조합니다.
 > * `imageContent` 전송 중 오류가 발생되었다면 `imageContent Error 코드표`을 참조합니다.
+<br>
+
+> **[성능향상을 위한 고려사항]**
+> * `imageUrl`에 명시된 이미지 URL은 메시지가 전송될때마다 `톡톡`에서 이미지를 다운로드받아 사용합니다.
+> * 자주 사용되는 이미지는 [Image Upload API](/imageupload_api_v1.md)를 사용하여 메시지 전송 속도를 극대화 할 수 있습니다.
 <br>
 <br>
 
