@@ -45,7 +45,8 @@ HTTP/1.1 200 OK
     "resultMessage": "이미지 업로드 중 에러"
 }
 ```
-
+<br>
+<br>
 
 ## `imageId` 사용방법
 * 기존에 `imageUrl`속성 대신 `imageId`속성으로 대체해서 사용하면 됩니다.
