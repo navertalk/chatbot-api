@@ -1,6 +1,7 @@
 # **Chat Bot API** V1
 
 ## 차례
+* [챗봇API 구조도](#챗봇api-구조도)
 * [챗봇용 파트너 계정 생성](#챗봇용-파트너-계정-생성)
 * [`Webhook` 작성 방법](#webhook-작성-방법)
   * [`Webhook` 요구사항](#webhook-요구사항)
@@ -31,6 +32,15 @@
   * [Profile API V1](/profile_api_v1.md)
   * [Pay API V1](/pay_api_v1.md)
   * [Image Upload API V1](/imageupload_api_v1.md)
+<br>
+<br>
+
+
+## 챗봇API 구조도
+![composite_message](/chatbotapi_structure.png)
+* 유저의 다양한 이벤트가 `챗봇플랫폼`을 통해 챗봇에게 `Webhook`으로 전달됩니다.
+* 챗봇은 `보내기 API`를 통해 유저에게 메시지 전달 이벤트를 보낼 수 있습니다.
+* `챗봇플랫폼`은 기본적인 `메시지API` 뿐만아니라 `프로필API`, `페이API`를 제공합니다.
 <br>
 <br>
 
