@@ -5,7 +5,6 @@
 * 일반적으로 `imageContent` 나 `compositeContent`에서 사용하는 `imageUrl`은 매번 이미지를 업로드하기 때문에 유저에게 **즉각적인** 메시지 전달이 불가능 합니다.
 * 그러나 이미지를 미리 업로드 후 `imageId`를 통해 메시지를 전달하는 경우 텍스트 메시지와 같은 속도로 메시지가 전달됩니다.
 * 특히, `compositeContent`의 `캐로셀(Carousel)`방식으로 이미지를 여러개 사용하는경우 속도차이는 더 극명합니다.
-* 주어진 URL로 톡톡서버가 접근해서 이미지 다운로드 받을 때, HTTP 응답 헤더 Content-Type 값은 반드시 해당 이미지 유형과 일치해야 합니다.
 <br>
 
 ## 이벤트 명세서
@@ -22,6 +21,7 @@ Authorization: ct_wc8b1i_Pb1AXDQ0RZWuCccpzdNL
     "imageUrl": "http://shop1.phinf.naver.net/20170216_20/talktalk_14872437839327BN4b_PNG/menu_01.png"
 }
 ```
+> * 주어진 URL로 톡톡서버가 접근해서 이미지 다운로드 받을 때, HTTP 응답 헤더 Content-Type 값은 반드시 해당 이미지 유형과 일치해야 합니다.
 <br>
 
 ### 이미지 업로드 요청 `Response` 명세서
