@@ -15,6 +15,7 @@
   * `200 OK` : 결제승인되어 실제 결제처리(ex: 계좌이체나 카드결제 등)가 진행됩니다.
   * `200 OK`가 아닌 모든 HTTP상태코드 (ex: 301, 400, 404, 500, ..) : 결제승인되지 않습니다.
     * 결제승인 되지 않는 경우 사용자는 기본적으로 *어떠한 안내를 받지 못합니다.*. 따라서 결제승인하지 않는 건에 대하여 챗봇은 적절한 이벤트를 전송하여 사용자에게 결제승인되지 않는 이유를 안내해야합니다. 가령 `404` 상태코드 응답과 함께 응답본문으로 실패안내를 담은 `textContent`를 첨부하는 것을 권장합니다.
+* 결제 후 주문/예약 등의 구현을 위해서는 `pay_complete` 이벤트가 아닌 `pay_confirm` 이벤트를 활용해야합니다.  `pay_complete` 는 네이버페이 결제 절차의 완전한 종료가 아닌 유저의 결제에 대한 승인 진행 여부를 묻는 이벤트입니다. `pay_confirm` 이벤트는 결제승인이 완료된 후 전달되는 이벤트입니다.
 
 <br>
 
@@ -53,6 +54,53 @@
 * `paymentResult`의 `code`, `message` 필드값은 네이버페이 간편결제API 결체창 호출 후 이동되는 `returnUrl`의 파라메터인 `resultCode`, `resultMessage` 값을 그대로 반환합니다.
 * 네이버페이 간편결제 결제창 : https://developer.pay.naver.com/docs/api/payments#payments_window
 <br>
+
+
+### pay_confirm 이벤트
+* `pay_complete` 이벤트는 `챗봇`이 `pay_complete` 이벤트에 대하여 `200 OK` 응답을 한 후 진행된 네이버페이 간편결제 결제승인의 결과를 전달하는 이벤트입니다.
+  * 네이버페이 결제승인은 연동은행이나 사용자의 결제수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제승인 실패 시에도 `pay_confirm` 이벤트는 전달되며 이 때 `options.code`(json 응답 options 필드의 code 필드) 값이 `Fail`로 전달되고 실패사유는 `option.message`로 전달됩니다. 성공시에는 `options.code` 필드값이 `Success`입니다.
+* 네이버페이 간편결제 결제승인 결과는 이벤트의 `options.paymentConfirmResult` 필드로 전달합니다.
+* 네이버페이 간편결제 결제승인 API : https://developer.pay.naver.com/docs/api/payments#payments_apply
+<br>
+
+#### pay_confirm 이벤트 구조
+[결제승인 성공 시]
+```javascript
+{
+    "event": "pay_confirm",
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "options": {
+        "paymentConfirmResult": { /* 결제 결과 정보 */
+            "code" : "Success", /* 네이버페이 결제승인 결과 코드 */
+	    "message" : null, /* 네이버페이 결제승인 결과 메시지 */
+            "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
+            "deatil" : {
+		/* 네이버페이 간편결제 결제승인 API 응답본문의 detail 필드를 그대로 반환. */
+	    }
+	}
+    }
+}
+```
+
+[결제승인 실패 시]
+```javascript
+{
+    "event": "pay_confirm",
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "options": {
+        "paymentConfirmResult": { /* 결제 결과 정보 */
+            "code" : "Fail", /* 네이버페이 결제승인 결과 코드 */
+	    "message" : "잔액 부족", /* 네이버페이 결제승인 결과 메시지 */
+            "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
+            "deatil" : {
+		/* 네이버페이 간편결제 결제승인 API 응답본문의 detail 필드를 그대로 반환. */	    
+	    }
+	}
+    }
+}
+```
+<br>
+
 
 ## 메시지 데이터 명세
 
@@ -158,16 +206,18 @@
 
 ## 개발가이드
 
-* 네이버페이 결제에 대한 승인은 챗봇이 결정합니다. 상품의 재고여부나 판매 가능여부에 따라 챗봇은 `pay_complete` 이벤트에 대한 HTTP 응답을 적절하게 주어야합니다.
+* 네이버페이 결제승인 진행은 챗봇이 결정합니다. 상품의 재고여부나 판매 가능여부에 따라 챗봇은 `pay_complete` 이벤트에 대한 HTTP 응답으로 결제승인을 진행여부를 
+  제어합니다
   * 항상 `200 OK` 응답으로 결제 승인을 처리할 경우, 재고 없는 상품에 대한 주문이 발생할 수 있으므로 주의해야합니다.
   * 품절된 상품에 대한 결제 승인을 거부하고자하면 `400`이나 `404`와 같은 에러 HTTP 상태코드로 `pay_complete` 이벤트에 응답해야합니다.
+* 챗봇은 네이버페이 결제승인 후  `pay_confirm` 이벤트를 수신하며, 이 이벤트를 활용하여 결제완료 후 트리거될 로직을 구현할 수 있습니다. (ex: 결제 후 에약/구매)
 * 이미 승인된 결제건의 취소는 두 가지 방법으로 할 수 있습니다.
   * 네이버페이 가맹센터에서 결제내역 관리 메뉴를 통해 할 수 있습니다.
   * 네이버페이 결제취소API를 사용하여 할 수 있습니다. `paymentId`를 호출파라메터로 사용하며, 이는 `pay_complete`의 이벤트 객체에 담겨있습니다. 따라서 추후 취소 버튼 등을 구현하기 위해서는 `paymentId`를 반드시 보관해야합니다.
     * 참고 - 네이버페이 결제취소 API : https://developer.pay.naver.com/docs/api/payments#payments_cancel
   * 챗봇API에서는 별도로 결제취소를 위한 API를 지원하지 않습니다.
 
-### [예제1] 결제승인 처리하기
+### [예제1] 결제 처리하기
 
 ```javascript
 let express = reuiqre('express');
@@ -180,13 +230,8 @@ app.post('/', (req, res) => {
     if (req.body.event == 'pay_complete') {
         // 상품의 재고여부를 확인하여 결제승인을 결정한다.
         if (hasStock(req.body.options.paymentResult.merchantPayKey)) {
-            res.status(200).json({
-                "event": "send",
-                "textContent": {
-                    "text": "결제가 승인되었습니다."
-                }
-            });
-        } else {
+            res.status(200); // 응답본문을 전달할 필요가 없다.
+        } else {
             res.status(404).json({
                 "event": "send",
                 "textContent": {
@@ -194,7 +239,25 @@ app.post('/', (req, res) => {
                 }
             });
         }
-    }
+    } else if (req.body.event == 'pay_confirm) {
+        const result = req.body.event.options.payConfirmResult;
+        if (result.code == 'Success') {
+	    registOrder(result.paymentId, result.merchantUserKey, result.merchantPayKey); // 서비스의 주문로직 처리
+	  res.json({
+	        "event": "send",
+	        "textContent": {
+	            "text": "주문이 접수되었습니다."
+ 	        }
+            });
+	} else {
+	   res.json({
+	        "event": "send",
+	        "textContent": {
+	            "text": result.message // 네이버페이 간편결제 결제승인 오류메시지를 그대로 사용(ex: 잔액부족)
+ 	        }
+            });
+	}
+   }
 }
 })
 ```
