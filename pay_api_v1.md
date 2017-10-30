@@ -239,8 +239,8 @@ app.post('/', (req, res) => {
                 }
             });
         }
-    } else if (req.body.event == 'pay_confirm) {
-        const result = req.body.event.options.payConfirmResult;
+    } else if (req.body.event == 'pay_confirm') {
+        const result = req.body.event.options.paymentConfirmResult;
         if (result.code == 'Success') {
 	    registOrder(result.paymentId, result.merchantUserKey, result.merchantPayKey); // 서비스의 주문로직 처리
 	  res.json({
