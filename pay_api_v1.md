@@ -53,14 +53,17 @@
 ```
 * `paymentResult`의 `code`, `message` 필드값은 네이버페이 간편결제API 결체창 호출 후 이동되는 `returnUrl`의 파라메터인 `resultCode`, `resultMessage` 값을 그대로 반환합니다.
 * 네이버페이 간편결제 결제창 : https://developer.pay.naver.com/docs/api/payments#payments_window
+
 <br>
 
 
 ### pay_confirm 이벤트
 * `pay_complete` 이벤트는 `챗봇`이 `pay_complete` 이벤트에 대하여 `200 OK` 응답을 한 후 진행된 네이버페이 간편결제 결제승인의 결과를 전달하는 이벤트입니다.
-  * 네이버페이 결제승인은 연동은행이나 사용자의 결제수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제승인 실패 시에도 `pay_confirm` 이벤트는 전달되며 이 때 `options.code`(json 응답 options 필드의 code 필드) 값이 `Fail`로 전달되고 실패사유는 `option.message`로 전달됩니다. 성공시에는 `options.code` 필드값이 `Success`입니다.
+  * 네이버페이 결제승인은 연동은행이나 사용자의 결제수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제승인 실패 시에도 `pay_confirm` 이벤트는 전달되며 이 때 `options.code`(json 응답 options 필드의 code 필드) 값이 `Fail`로 전달되고 실패사유는 `option.message`로 전달됩니다. 성공시에는 `options.code` 필드값이 `Success`입니다.
+  * 따라서 `pay_confirm` 이벤트 수신 시 항상 주문/예약 등의 처리를 진행하면 안되며, `options.code` 값에 따른 처리를 해야합니다.
 * 네이버페이 간편결제 결제승인 결과는 이벤트의 `options.paymentConfirmResult` 필드로 전달합니다.
 * 네이버페이 간편결제 결제승인 API : https://developer.pay.naver.com/docs/api/payments#payments_apply
+
 <br>
 
 #### pay_confirm 이벤트 구조
@@ -258,6 +261,5 @@ app.post('/', (req, res) => {
             });
 	}
    }
-}
 })
 ```
