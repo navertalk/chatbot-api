@@ -15,6 +15,7 @@
   * [`leave` 이벤트](#leave-이벤트)
   * [`friend` 이벤트](#friend-이벤트)
   * [`send` 이벤트](#send-이벤트)
+  * [`echo` 이벤트](#echo-이벤트)
 * [메시지 타입 명세서](#메시지-타입-명세서)
   * [textContent](#textcontent)
   * [imageContent](#imagecontent)
@@ -481,6 +482,40 @@ Content-Type: application/json;charset=UTF-8
 >   * (2) `유저`가 채팅창에 있다고 판단하는 근거는 `Web Socket`으로 서버와 연결되어있을때 입니다. 그러나 빠른 페이지 렌더링을 위해 `Web Socket`는 `Lazy-Connection`를 하기때문에 `open`이벤트와 동시에 `notification` `true`로 전송하게되면 `유저`가 채팅창에서 push를 받을 수 있습니다.
 >   * 위와같은 이유로 `default(false)` 사용을 추천합니다. `유저`의 요청에 챗봇은 실시간으로 응답하기 때문에 `유저`가 채팅창을 떠난상태에서 답변이 전송되는 경우가 드뭅니다.
 >   * 그러나 `(1)`, `(2)`에 해당하지 않으면서 `배송출발` 또는 `예약완료`처럼 특정 사건에의해 챗봇이 이벤트를 보내야한다면 `notification` 사용을 권장합니다.
+<br>
+<br>
+
+### `echo` 이벤트 
+* echo 이벤트는 [파트너센터](https://partner.talk.naver.com/)를 통해 상담사가 유저에게 보낸 메시지와 챗봇이 유저에게 보낸 메시지를 수신하는 이벤트입니다.
+* 이벤트명은 `echo`이며 유저에게 보내고자 했었던 원본 이벤트는 `echoedEvent`속성에 담기게 됩니다.
+`echo`이벤트를 수신하기 위해서는 `챗봇API > API설정 > Event선택`를 통해 `echo`를 활성화할 수 있습니다.
+<br>
+
+#### `echo` 이벤트 구조 
+
+```json
+{
+  "event": "echo",
+  "echoedEvent": "send",
+  "user": "5KcCQTARWKNKv1IOvXwYQw",
+  "partner": "wc8b1i",
+  "textContent": {
+    "text": "명함을 보냈습니다.",
+    "inputType": "nameCard"
+  },
+  "options": {
+    "mobile": false
+  }
+}
+```
+
+> [주의사항]
+>
+> 위에서 설명한대로 `echo` 이벤트는 챗봇이 보낸 메시지까지 다시 수신하기 때문에, 
+>
+> 해당 이벤트가 발생했을 때 메시지를 챗봇 플랫폼으로 재 전송하게 되면 끊임없는 메시지 송수신이 일어나게 됩니다.
+>
+> 따라서 해당 이벤트에 대한 정확한 테스트를 진행하신 뒤, 실제 서비스에 반영하시기 바랍니다.
 <br>
 
 ## 메시지 타입 명세서
