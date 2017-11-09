@@ -11,10 +11,10 @@
 
 ### pay_complete 이벤트
 * `pay_complete` 이벤트는 `유저`가 [`compositeContent`](./README.md#compositecontent-object)의 `PAY`타입 버튼을 눌러 네이버페이 간편결제를 완료한 경우 발생하는 이벤트입니다.
-* 결제승인 여부는 `pay_complete` 이벤트에 대한 챗봇 응답의 HTTP 상태코드로 결정됩니다. 각 HTTP 상태코드에 따라 다음과 같이 결제승인을 처리합니다.
-  * `200 OK` : 결제승인되어 실제 결제처리(ex: 계좌이체나 카드결제 등)가 진행됩니다.
-  * `200 OK`가 아닌 모든 HTTP상태코드 (ex: 301, 400, 404, 500, ..) : 결제승인되지 않습니다.
-    * 결제승인 되지 않는 경우 사용자는 기본적으로 *어떠한 안내를 받지 못합니다.*. 따라서 결제승인하지 않는 건에 대하여 챗봇은 적절한 이벤트를 전송하여 사용자에게 결제승인되지 않는 이유를 안내해야합니다. 가령 `404` 상태코드 응답과 함께 응답본문으로 실패안내를 담은 `textContent`를 첨부하는 것을 권장합니다.
+* 결제승인진행 여부는 `pay_complete` 이벤트에 대한 챗봇 응답의 HTTP 상태코드로 결정됩니다. 각 HTTP 상태코드에 따라 다음과 같이 결제승인진행을 처리합니다.
+  * `200 OK` : 결제승인을 진행합니다. 이후 결제승인이되면 실제 결제처리(ex: 계좌이체나 카드결제 등)가 되며 `pay_confirm`이벤트가 전달됩니다.
+  * `200 OK`가 아닌 모든 HTTP상태코드 (ex: 301, 400, 404, 500, ..) : 결제승인을 진행하지 않습니다.
+    * 결제승인 진행하지 않는 경우 사용자는 기본적으로 *어떠한 안내를 받지 못합니다.*. 따라서 결제승인을 진행하지 않는 건에 대하여 챗봇은 적절한 이벤트를 전송하여 사용자에게 결제승인을 진행하지 않는 이유를 안내해야합니다. 가령 `404` 상태코드 응답과 함께 응답본문으로 실패안내를 담은 `textContent`를 첨부하는 것을 권장합니다.
 * 결제 후 주문/예약 등의 구현을 위해서는 `pay_complete` 이벤트가 아닌 `pay_confirm` 이벤트를 활용해야합니다.  `pay_complete` 는 네이버페이 결제 절차의 완전한 종료가 아닌 유저의 결제에 대한 승인 진행 여부를 묻는 이벤트입니다. `pay_confirm` 이벤트는 결제승인이 완료된 후 전달되는 이벤트입니다.
 
 <br>
@@ -59,8 +59,8 @@
 
 ### pay_confirm 이벤트
 * `pay_complete` 이벤트는 `챗봇`이 `pay_complete` 이벤트에 대하여 `200 OK` 응답을 한 후 진행된 네이버페이 간편결제 결제승인의 결과를 전달하는 이벤트입니다.
-  * 네이버페이 결제승인은 연동은행이나 사용자의 결제수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제승인 실패 시에도 `pay_confirm` 이벤트는 전달되며 이 때 `options.code`(json 응답 options 필드의 code 필드) 값이 `Fail`로 전달되고 실패사유는 `option.message`로 전달됩니다. 성공시에는 `options.code` 필드값이 `Success`입니다.
-  * 따라서 `pay_confirm` 이벤트 수신 시 항상 주문/예약 등의 처리를 진행하면 안되며, `options.code` 값에 따른 처리를 해야합니다.
+  * 네이버페이 결제승인은 연동은행이나 사용자의 결제수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제승인 실패 시에도 `pay_confirm` 이벤트는 전달되며 이 때 `options.paymentConfirmResult.code`(json 응답 `{"options" : {"paymentConfirmResult": {"code": "값"}}}`) 값이 `Fail`로 전달되고 실패사유는 `options.paymentConfirmResult.message`로 전달됩니다. 성공시에는 `options.paymentConfirmResult.code` 필드값이 `Success`입니다.
+  * 따라서 `pay_confirm` 이벤트 수신 시 항상 주문/예약 등의 처리를 진행하면 안되며, `options.paymentConfirmResult.code` 값에 따른 처리를 해야합니다.
 * 네이버페이 간편결제 결제승인 결과는 이벤트의 `options.paymentConfirmResult` 필드로 전달합니다.
 * 네이버페이 간편결제 결제승인 API : https://developer.pay.naver.com/docs/api/payments#payments_apply
 
