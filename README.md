@@ -16,6 +16,7 @@
   * [`friend` 이벤트](#friend-이벤트)
   * [`send` 이벤트](#send-이벤트)
   * [`echo` 이벤트](#echo-이벤트)
+  * [`action` 이벤트](#action-이벤트)
 * [메시지 타입 명세서](#메시지-타입-명세서)
   * [textContent](#textcontent)
   * [imageContent](#imagecontent)
@@ -516,6 +517,28 @@ Content-Type: application/json;charset=UTF-8
 > 해당 이벤트가 발생했을 때 메시지를 챗봇 플랫폼으로 재 전송하게 되면 끊임없는 메시지 송수신이 일어나게 됩니다.
 >
 > 따라서 해당 이벤트에 대한 정확한 테스트를 진행하신 뒤, 실제 서비스에 반영하시기 바랍니다.
+<br>
+<br>
+
+### `action` 이벤트
+* `action` 이벤트는 대화창에서 추가적인 행위가 필요할 때 사용할 수 있는 이벤트입니다.
+* `Webhook`의 응답 메시지 또는 `보내기 API`를 통해 전송할 수 있습니다.
+* `action` 이벤트의 `action`정보는 다음과 같습니다.
+  * `typingOn` : `작성중` 이미지가 ( ![image](https://talk.naver.com/static/front/pc/img/typing.gif) )가 파트너 메시지로 보여집니다. 추가 액션이 없다면 10초 동안 유지됩니다. 연속해서 보내면 새로 보낸 시점부터 유지시간이 갱신됩니다.
+  * `typingOff` : `작성중` 이미지가 대화창에서 사라집니다. 다른 메시지를 `send`이벤트로 보내도 동일한 효과가 있습니다.
+```javascript
+{
+    "event": "action",
+    "user": "al-2eGuGr5WQOnco1_V-FQ",
+    "options": {
+        "action": "typingOn" | "typingOff"
+    }
+}
+```
+> **[사용팁]**
+>* `typingOn`,`typingOff` 액션은 대화창에서 메시지 수신이 늦어지는 경우 메시지가 처리 중이라는 것을 사용자에게 알릴 때 사용할 수 있습니다. 혹은 너무 빠른 메시지 응답보다 천천히 대화하는 경험을 주고 싶을 때에도 사용할 수 있습니다.
+>* 일반적으로 `typingOff` 액션을 사용 하기보다는 `typingOn` 전송 후 메시지 `send`이벤트를 전송합니다.
+<br>
 <br>
 
 ## 메시지 타입 명세서
