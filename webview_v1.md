@@ -38,6 +38,7 @@
 | mobileTargetAttr | TargetAttr |  N   | 모바일 타켓의 추가 속성                        |
 
 `TargetAttr` Object
+
 |      key      |  Type   |  필수  | 설명                                       |
 | :-----------: | :-----: | :--: | ---------------------------------------- |
 | webviewTitle  | string  |  N   | 웹뷰의 타이틀. 지정안하면 버튼에 노출되는 텍스트 사용           |
