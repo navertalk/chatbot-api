@@ -26,7 +26,6 @@
   "echoedEvent": "send",
   "event": "echo",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc8b1i",
   "textContent": {
     "text": "하이",
     "inputType": "typing"
@@ -43,7 +42,6 @@
 {
   "event": "handover",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc8b1i",
   "options": {
     "control": "passThread",
     "metadata": "{'managerNickname':'구매자','autoEnd':false}"
@@ -55,7 +53,6 @@
   "echoedEvent": "send",
   "event": "echo",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc8b1i",
   "textContent": {
     "text": "하이",
     "inputType": "typing"
@@ -80,7 +77,6 @@
 {
   "event": "handover",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc8b1i",
   "options": {
     "control": "passThread",
     "targetId": 1
@@ -94,7 +90,6 @@
   "standby": true,
   "event": "send",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc8b1i",
   "textContent": {
     "text": "헬로",
     "inputType": "typing"
@@ -111,7 +106,6 @@
 {
   "event": "handover",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc1234",
   "options": {
     "control": "passThread",
     "metadata": "{\"managerNickname\":\"파트너닉네임\",\"autoEnd\":false}"
@@ -124,7 +118,6 @@
 {
   "event": "handover",
   "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc1234",
   "options": {
     "control": "passThread",
     "metadata": "{\"autoEnd\":true}"
@@ -138,7 +131,6 @@
 {
     "event": "handover",
     "user": "al-2eGuGr5WQOnco1_V-FQ",
-    "partner": "wc1234",
     "options": {
         "control": "takeThread",
         "metadata": ""
