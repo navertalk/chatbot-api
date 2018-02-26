@@ -16,7 +16,7 @@
   * [`send` 이벤트](#send-이벤트)
   * [`echo` 이벤트](#echo-이벤트)
   * [`action` 이벤트](#action-이벤트)
-  * [`persistentMenu` 이벤트](#persistentMenu-이벤트)
+  * [`persistentMenu` 이벤트](#persistentmenu-이벤트)
 * [메시지 타입 명세](#메시지-타입-명세)
   * [textContent](#textcontent)
   * [imageContent](#imagecontent)
@@ -550,9 +550,10 @@ Content-Type: application/json;charset=UTF-8
 
 ### `persistentMenu` 이벤트
 
-`persistentMenu`(이하 고정 메뉴)는 사용자가 대화 중에 상시로 접근할 수 있는 메뉴입니다. 사용자에게 챗봇을 소개하거나 공지, 이벤트를 안내하는 데 사용할 수 있습니다.<br>
-![image](https://media.oss.navercorp.com/user/2035/files/73520c74-fa17-11e7-9d9f-7d9644d9e8fc)
-<br>
+`persistentMenu`(이하 고정 메뉴)는 사용자가 대화 중에 상시로 접근할 수 있는 메뉴입니다. 사용자에게 챗봇을 소개하거나 공지, 이벤트를 안내하는 데 사용할 수 있습니다.
+
+![persistent_menu](/images/persistentMenu.png)
+
 이 메뉴에는 사용자가 언제든지 실행할 수 있는 기능만 포함해야 합니다. 예를 들어, URL을 연결하거나 클라이언트에서 코드를 전송받아 처리할 수 있습니다. 설정 이벤트이므로 `사용자 식별값`은 필요하지 않습니다. 
 
 #### `persistentMenu` 이벤트 구조
