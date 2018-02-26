@@ -2,101 +2,105 @@
 
 ## 개요
 
-* `Pay API`는 [`Chat Bot API`](./README.md)의 확장 API이며 네이버페이 결제버튼의 생성요청 및 네이버페이 결제관련 이벤트 수신 기능을 포함합니다.
-* `Pay API`는 챗봇 API에 네이버페이 가맹정보가 연동이 완료되어야 이용할 수 있습니다.
-  * 네이버페이 가맹정보 연동방법은 네이버톡톡 파트너센터 챗봇API 설정 메뉴에서 확인할 수 있습니다.
-  
+`Pay API`는 [`Chat Bot API`](./README.md)의 확장 API로서, 네이버페이 결제 버튼의 생성 요청 및 네이버페이 결제 관련 이벤트 수신 기능을 제공합니다. 
+`Pay API`는 챗봇 API에 네이버페이 가맹 정보를 연동해야 이용할 수 있습니다.
+
+ > **참고**
+ > 
+ > 네이버페이 가맹 정보 연동 방법은 [네이버 톡톡 파트너센터](https://partner.talk.naver.com/)의 **챗봇 API > API 설정** 메뉴에서 확인할 수 있습니다.
+ 
+<br>
+
 
 ## 이벤트 명세
 
 ### pay_complete 이벤트
-* `pay_complete` 이벤트는 `유저`가 [`compositeContent`](./README.md#compositecontent-object)의 `PAY`타입 버튼을 눌러 네이버페이 간편결제를 완료한 경우 발생하는 이벤트입니다.
-* 결제승인진행 여부는 `pay_complete` 이벤트에 대한 챗봇 응답의 HTTP 상태코드로 결정됩니다. 각 HTTP 상태코드에 따라 다음과 같이 결제승인진행을 처리합니다.
-	* `200 OK` : 결제승인을 진행합니다. 이후 결제승인이되면 실제 결제처리(ex: 계좌이체나 카드결제 등)가 되며 `pay_confirm`이벤트가 전달됩니다.
-	* `200 OK`가 아닌 모든 HTTP상태코드 (ex: 301, 400, 404, 500, ..) : 결제승인을 진행하지 않습니다.
-		* 결제승인 진행하지 않는 경우 사용자는 기본적으로 *어떠한 안내를 받지 못합니다.*. 따라서 결제승인을 진행하지 않는 건에 대하여 챗봇은 적절한 이벤트를 전송하여 사용자에게 결제승인을 진행하지 않는 이유를 안내해야합니다. 가령 `404` 상태코드 응답과 함께 응답본문으로 실패안내를 담은 `textContent`를 첨부하는 것을 권장합니다.
-* 결제 후 주문/예약 등의 구현을 위해서는 `pay_complete` 이벤트가 아닌 `pay_confirm` 이벤트를 활용해야합니다.  `pay_complete` 는 네이버페이 결제 절차의 완전한 종료가 아닌 유저의 결제에 대한 승인 진행 여부를 묻는 이벤트입니다. `pay_confirm` 이벤트는 결제승인이 완료된 후 전달되는 이벤트입니다.
+`pay_complete` 이벤트는 `사용자`가 [`compositeContent`](./README.md#compositecontent-object)의 `PAY` 타입 버튼을 눌러 네이버페이 간편 결제를 완료한 경우 발생하는 이벤트입니다.<br>
+결제 승인 진행 여부는 `pay_complete` 이벤트에 대한 챗봇 응답의 HTTP 상태 코드로 결정됩니다. 각 HTTP 상태 코드에 따라 다음과 같이 결제 승인을 처리합니다.
+* `200 OK`: 결제 승인을 진행합니다. 이후 결제 승인이 완료되면 실제 결제 처리(예: 계좌 이체나 카드 결제 등)가 되며 `pay_confirm` 이벤트가 전달됩니다.
+* `200 OK`가 아닌 모든 HTTP 상태 코드(예: 301, 400, 404, 500...): 결제 승인을 진행하지 않습니다.<br>
+결제 승인을 진행하지 않는 경우 사용자는 기본적으로 *어떠한 안내도 받지 못합니다*. 따라서 챗봇은 결제 승인을 진행하지 않는 건에 관해 적절한 이벤트를 전송하여 사용자에게 결제 승인을 진행하지 않는 이유를 안내해야 합니다. 예를 들어, `404` 상태 코드 응답과 함께 응답 본문으로 실패 안내를 담은 `textContent`를 첨부하는 것을 권장합니다.
+
+결제 후 주문/예약 등을 구현하려면 `pay_complete` 이벤트가 아닌 `pay_confirm` 이벤트를 활용해야 합니다. `pay_complete`는 네이버페이 결제 절차의 완전한 종료가 아닌 사용자 결제에 대한 승인 진행 여부를 묻는 이벤트입니다. `pay_confirm` 이벤트는 결제 승인이 완료된 후 전달되는 이벤트입니다.
 
 <br>
 
 #### pay_complete 이벤트 구조
-[결제성공 시]
+[결제 성공 시]
 ```javascript
 {
     "event": "pay_complete",
-    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 사용자 식별값 */
     "options": {
         "paymentResult": { /* 결제 결과 정보 */
             "code" : "Success", /* 네이버페이 결제 결과 코드 */
             "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
             "merchantPayKey" : "bot-custom-pay-key-1234", /* PAY 버튼 데이터로 지정한 커스텀 결제 식별값 */
-            "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ",/* PAY 버튼 데이터로 지정한 커스텀 결제 유저 식별값 */
+            "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ",/* PAY 버튼 데이터로 지정한 커스텀 결제 사용자 식별값 */
 	}
     }
 }
 ```
 
-[결제실패 시]
+[결제 실패 시]
 ```javascript
 {
     "event": "pay_complete",
-    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 사용자 식별값 */
     "options": {
-        "paymentResult": { /* 네이버페이 간편결제 결과정보 */
-            "code" : "Fail", /* 네이버페이 간편결제 결제창호출 결과코드 */
-            "message" : "OwnerAuthFail", /* 네이버페이 간편결제 결제창호출 결과메시지 */
+        "paymentResult": { /* 네이버페이 간편결제 결과 정보 */
+            "code" : "Fail", /* 네이버페이 간편결제 결제창 호출 결과 코드 */
+            "message" : "OwnerAuthFail", /* 네이버페이 간편결제 결제창 호출 결과 메시지 */
             "merchantPayKey" : "bot-custom-pay-key-1234", /* 판매자 결제 식별값 */
-            "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ" /* 판매자 유저 식별값 */
+            "merchantUserKey" : "al-2eGuGr5WQOnco1_V-FQ" /* 판매자 사용자 식별값 */
 	}
     }
 }
 ```
-* `paymentResult`의 `code`, `message` 필드값은 네이버페이 간편결제API 결체창 호출 후 이동되는 `returnUrl`의 파라메터인 `resultCode`, `resultMessage` 값을 그대로 반환합니다.
-* 네이버페이 간편결제 결제창 : https://developer.pay.naver.com/docs/api/payments#payments_window
+* `paymentResult`의 `code`, `message` 필드값은 네이버페이 간편결제 API 결체창 호출 후 이동하는 `returnUrl`의 파라미터인 `resultCode`, `resultMessage`값을 그대로 반환합니다.
+* 네이버페이 간편결제 결제창: https://developer.pay.naver.com/docs/api/payments#payments_window
 
 <br>
 
 
 ### pay_confirm 이벤트
-* `pay_complete` 이벤트는 `챗봇`이 `pay_complete` 이벤트에 대하여 `200 OK` 응답을 한 후 진행된 네이버페이 간편결제 결제승인의 결과를 전달하는 이벤트입니다.
-  * 네이버페이 결제승인은 연동은행이나 사용자의 결제수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제승인 실패 시에도 `pay_confirm` 이벤트는 전달되며 이 때 `options.paymentConfirmResult.code`(json 응답 `{"options" : {"paymentConfirmResult": {"code": "값"}}}`) 값이 `Fail`로 전달되고 실패사유는 `options.paymentConfirmResult.message`로 전달됩니다. 성공시에는 `options.paymentConfirmResult.code` 필드값이 `Success`입니다.
-  * 따라서 `pay_confirm` 이벤트 수신 시 항상 주문/예약 등의 처리를 진행하면 안되며, `options.paymentConfirmResult.code` 값에 따른 처리를 해야합니다.
-* 네이버페이 간편결제 결제승인 결과는 이벤트의 `options.paymentConfirmResult` 필드로 전달합니다.
-* 네이버페이 간편결제 결제승인 API : https://developer.pay.naver.com/docs/api/payments#payments_apply
+`pay_complete` 이벤트는 `챗봇`이 `pay_complete` 이벤트에 대해 `200 OK` 응답을 한 후 진행된 네이버페이 간편결제 결제 승인 결과를 전달하는 이벤트입니다. 네이버페이 간편결제 결제 승인 결과는 이벤트의 `options.paymentConfirmResult` 필드로 전달합니다.<br>
+네이버페이 결제 승인은 연동 은행이나 사용자의 결제 수단 이슈 등 다양한 이유로 실패할 수 있습니다. 결제 승인 실패 시에도 `pay_confirm` 이벤트가 전달되며, 이때 `options.paymentConfirmResult.code`(JSON 응답 `{"options" : {"paymentConfirmResult": {"code": "값"}}}`)값은 `Fail`, 실패 사유는 `options.paymentConfirmResult.message`로 전달됩니다. 성공 시에는 `options.paymentConfirmResult.code` 필드값이 `Success`입니다. 따라서 `pay_confirm` 이벤트 수신 시 바로 주문/예약 등의 처리를 진행해서는 안 되며, `options.paymentConfirmResult.code`값에 따라 처리해야 합니다. 
+* 네이버페이 간편결제 결제 승인 API: https://developer.pay.naver.com/docs/api/payments#payments_apply
 
 <br>
 
 #### pay_confirm 이벤트 구조
-[결제승인 성공 시]
+[결제 승인 성공 시]
 ```javascript
 {
     "event": "pay_confirm",
-    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 사용자 식별값 */
     "options": {
         "paymentConfirmResult": { /* 결제 결과 정보 */
-            "code" : "Success", /* 네이버페이 결제승인 결과 코드 */
-	    "message" : null, /* 네이버페이 결제승인 결과 메시지 */
+            "code" : "Success", /* 네이버페이 결제 승인 결과 코드 */
+	    "message" : null, /* 네이버페이 결제 승인 결과 메시지 */
             "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
             "deatil" : {
-		/* 네이버페이 간편결제 결제승인 API 응답본문의 detail 필드를 그대로 반환. */
+		/* 네이버페이 간편결제 결제 승인 API 응답 본문의 detail 필드를 그대로 반환. */
 	    }
 	}
     }
 }
 ```
 
-[결제승인 실패 시]
+[결제 승인 실패 시]
 ```javascript
 {
     "event": "pay_confirm",
-    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 사용자 식별값 */
     "options": {
         "paymentConfirmResult": { /* 결제 결과 정보 */
-            "code" : "Fail", /* 네이버페이 결제승인 결과 코드 */
-	    "message" : "잔액 부족", /* 네이버페이 결제승인 결과 메시지 */
+            "code" : "Fail", /* 네이버페이 결제 승인 결과 코드 */
+	    "message" : "잔액 부족", /* 네이버페이 결제 승인 결과 메시지 */
             "paymentId" : "20170811D3adfaasLL", /* 네이버페이 결제 식별값.  */
             "deatil" : {
-		/* 네이버페이 간편결제 결제승인 API 응답본문의 detail 필드를 그대로 반환. */	    
+		/* 네이버페이 간편결제 결제 승인 API 응답 본문의 detail 필드를 그대로 반환. */	    
 	    }
 	}
     }
@@ -107,7 +111,7 @@
 
 ## 메시지 데이터 명세
 
-`PAY` 타입 버튼은 네이버페이 간편결제창 호출을 위한 버튼으로써, [compsiteContent](./README.md#compositecontent-object)에 넣을 수 있습니다.
+`PAY` 타입 버튼은 네이버페이 간편결제창을 호출하는 버튼으로서, [compsiteContent](./README.md#compositecontent-object)에 넣을 수 있습니다.
 
 ### `compositeContent`
 
@@ -115,56 +119,56 @@
 
 | 필드 | 타입 | 필수 | 설명 |
 |----|----|----|----|
-|data|`PaymentInfo`|true|네이버페이 간편결제 결제예약 파라메터|
+|data|`PaymentInfo`|true|네이버페이 간편결제 결제 예약 파라미터|
 
-#### `PaymentInfo` 오브젝트
+#### `PaymentInfo` Object
 
-`paymentInfo` 필드와 네이버페이 간편결제 결제예약API 파라메터는 1:1로 대응합니다: [네이버페이 간편결제 결제예약 API 문서](https://developer.pay.naver.com/docs/api/payments#payments_reserve) <br>
-그러나 아래와 같은 몇 개의 차이가 있습니다.
+`paymentInfo`와 네이버페이 간편결제 결제 예약 API 파라미터는 1:1로 대응합니다.([네이버페이 간편결제 결제예약 API](https://developer.pay.naver.com/docs/api/payments#payments_reserve) 참고) <br>
+그러나 아래와 같은 몇 가지 차이가 있습니다.
 
-* `modelVersion` 필드 제거 : 톡톡 결제 버튼은 model2 결제방식만을 지원하므로 해당값을 지정할 수 없습니다.
-* `productName` 필드 필수 -> 선택 : 생략시 `productItems`의 첫번째 엘리멘트의 `name` 필드로 대치합니다.
-* `productName` 필드 필수 -> 선택 : 생략시 `productItems` 각 엘리먼트의 `count`의 총 합으로 대치합니다.
-* `taxScopeAmount` 필드 필수 -> 선택 : 생략시 `totalPayAmount` 값으로 대치합니다. 따라서 전체 결제금액이 과세대상금액이 됩니다.
-* `taxExScopeAmount` 필드 필수 -> 선택 : 생략시 `totalPayAmount` - `taxScopeAmount` 값으로 대치합니다.
-* `merchantUserKey` 필드 필수 -> 선택 : 생략시 네이버톡톡 챗봇 `user`값으로 대치합니다. 챗봇 유저와 결제자 정보를 매핑할 수 있으므로 유용합니다.
-* `webhookUrl` 필드 제거 : 네이버톡톡 챗봇 결제에서 지원하지 않습니다.
-* `returnUrl` 필드 제거 : 네이버톡톡 챗봇 결제에서 지원하지 않습니다. 결제 최종승인 핸들링을 위해서는 [pay_complete 이벤트](#pay_complete-이벤트) 항목을 참고하십시오.
+* `modelVersion` 없음: 톡톡 결제 버튼은 model2 결제 방식만을 지원하므로 해당 값을 지정할 수 없습니다.
+* `productName` 필수 아님: 생략 시 `productItems`의 첫 번째 요소의 `name` 필드로 대치합니다.
+* `productName` 필수 아님: 생략 시 `productItems` 각 요소의 `count`의 총합으로 대치합니다.
+* `taxScopeAmount` 필수 아님: 생략 시 `totalPayAmount`값으로 대치합니다. 따라서 전체 결제 금액이 과세 대상 금액이 됩니다.
+* `taxExScopeAmount` 필수 아님: 생략 시 `totalPayAmount` - `taxScopeAmount`값으로 대치합니다.
+* `merchantUserKey` 필수 아님: 생략 시 네이버 톡톡 챗봇 `user`값으로 대치합니다. 챗봇 사용자와 결제자 정보를 매핑할 수 있으므로 유용합니다.
+* `webhookUrl` 없음: 네이버 톡톡 챗봇 결제에서 지원하지 않습니다.
+* `returnUrl` 없음: 네이버 톡톡 챗봇 결제에서 지원하지 않습니다. 결제 최종 승인 처리는 [pay_complete 이벤트](#pay_complete-이벤트) 항목을 참고하십시오.
 
-| key | type | 필수 | 설명 |
+| 키 | 타입 | 필수 | 설명 |
 |----|-----|----|----|
-|merchantPayKey|string|true|가맹점 주문내역 확인 가능한 가맹점 결제번호 또는 주문번호를 전달해야 합니다.|
-|merchantUserKey|string|false|가맹점의 사용자 키(개인 아이디와 같은 개인정보 데이터는 제외하여 전달해야 합니다). 기본값은 네이버톡톡 챗봇 유저키|
+|merchantPayKey|string|true|가맹점 주문 내역을 확인할 수 있는 가맹점 결제 번호 또는 주문 번호를 전달해야 합니다.|
+|merchantUserKey|string|false|가맹점의 사용자 키(개인 아이디와 같은 개인 정보 데이터는 제외하고 전달해야 합니다). 기본값은 네이버 톡톡 챗봇 사용자 키|
 |productName|string|false|대표 상품명. 예: 장미의 이름 외 1건(X), 장미의 이름(O)|
-|productCount|number|false|상품 수량 예: A 상품 2개 + B 상품 1개의 경우 productCount 3으로 전달|
-|totalPayAmount|number|true|총 결제 금액. 최소 결제금액은 100원|
+|productCount|number|false|상품 수량. 예: A 상품 2개 + B 상품 1개의 경우 productCount 3으로 전달|
+|totalPayAmount|number|true|총 결제 금액. 최소 결제 금액은 100원|
 |deliveryFee|number|false|배송비. 기본값 0|
 |taxScopeAmount|number|false|과세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액|
 |taxExScopeAmount|number|false|면세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액|
-|purchaserName|string|false|구매자 성명. 결제 상품이 보험인 경우에만 필수 값입니다. 그 외에는 전달할 필요가 없습니다.|
-|purchaserBirthday|string|false|구매자 생년월일(yyyymmdd). 결제 상품이 보험인 경우에만 필수 값입니다. 그 외에는 전달할 필요가 없습니다.|
+|purchaserName|string|false|구매자 성명. 결제 상품이 보험인 경우에만 필수입니다. 그 외에는 전달할 필요가 없습니다.|
+|purchaserBirthday|string|false|구매자 생년월일(yyyymmdd). 결제 상품이 보험인 경우에만 필수입니다. 그 외에는 전달할 필요가 없습니다.|
 |productItems|`ProductItem`[]|true|productItem 배열|
 
-#### `ProductItem` 오브젝트
+#### `ProductItem` Object
 
-`ProductItem` 오브젝트와 네이버페이 간편결제 결제예약API 파라메터 `productItems`의 엘리멘트는 1:1로 대응합니다.
+`ProductItem` Object와 네이버페이 간편결제 결제 예약 API의 파라미터 `productItems`의 요소는 1:1로 대응합니다.
 
-| key | type | 필수 | 설명 |
+| 키 | 타입 | 필수 | 설명 |
 |----|-----|----|----|
-|categoryType|string|true|결제 상품 유형. 유형 상세 정보는 페이 개발가이드를 참고하십시오.|
-|categoryId|string|true|결제 상품 유형 아이디. 유형 아이디 상세 정보는 페이 개발가이드를 참고하십시오.|
+|categoryType|string|true|결제 상품 유형. 유형 상세 정보는 [개발 방법](#개발-방법)을 참고하십시오.|
+|categoryId|string|true|결제 상품 유형 아이디. 유형 아이디 상세 정보는 [개발 방법](#개발-방법)을 참고하십시오.|
 |uid|string|true|상품 고유 아이디|
 |name|string|true|상품명|
-|startDate|string|false|시작일(yyyyMMdd). 예: 20160701 결제 상품이 공연, 영화, 보험, 여행, 항공, 숙박인 경우 입력을 권장합니다. |
-|endDate|string|false|종료일(yyyyMMdd). 예: 20160701 결제 상품이 공연, 영화, 보험, 여행, 항공, 숙박인 경우 입력을 권장합니다. |
-|sellerId|string|true|파트너 사에서 하위 판매자를 식별하기 위해 사용하는 식별키를 전달 합니다. ( 영대소문자 및 숫자만 허용 ) |
-|count|number|false|결제 상품 개수. 기본값 1|
+|startDate|string|false|시작일(yyyyMMdd). 예: 20160701 결제 상품이 공연, 영화, 보험, 여행, 항공, 숙박인 경우 입력하는 것을 권장합니다. |
+|endDate|string|false|종료일(yyyyMMdd). 예: 20160701 결제 상품이 공연, 영화, 보험, 여행, 항공, 숙박인 경우 입력하는 것을 권장합니다. |
+|sellerId|string|true|파트너 사에서 하위 판매자를 식별하기 위해 사용하는 식별 키를 전달합니다. 영문 대소문자와 숫자만 허용합니다. |
+|count|number|false|결제 상품 개수. 기본값은 1|
 
-[`PAY` 타입 버튼 사용예]
+[`PAY` 타입 버튼 사용 예]
 ```javascript
 {
     "event": "send",
-    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 유저 식별값 */
+    "user": "al-2eGuGr5WQOnco1_V-FQ", /* 사용자 식별값 */
     
     "compositeContent": {
         "compositeList":[
@@ -207,20 +211,24 @@
 ```
 <br>
 
-## 개발가이드
+## 네이버페이 결제 처리 구현 방법
 
-* 네이버페이 결제승인 진행은 챗봇이 결정합니다. 상품의 재고여부나 판매 가능여부에 따라 챗봇은 `pay_complete` 이벤트에 대한 HTTP 응답으로 결제승인을 진행여부를 
-  제어합니다
-  * 항상 `200 OK` 응답으로 결제 승인을 처리할 경우, 재고 없는 상품에 대한 주문이 발생할 수 있으므로 주의해야합니다.
-  * 품절된 상품에 대한 결제 승인을 거부하고자하면 `400`이나 `404`와 같은 에러 HTTP 상태코드로 `pay_complete` 이벤트에 응답해야합니다.
-* 챗봇은 네이버페이 결제승인 후  `pay_confirm` 이벤트를 수신하며, 이 이벤트를 활용하여 결제완료 후 트리거될 로직을 구현할 수 있습니다. (ex: 결제 후 에약/구매)
-* 이미 승인된 결제건의 취소는 두 가지 방법으로 할 수 있습니다.
-  * 네이버페이 가맹센터에서 결제내역 관리 메뉴를 통해 할 수 있습니다.
-  * 네이버페이 결제취소API를 사용하여 할 수 있습니다. `paymentId`를 호출파라메터로 사용하며, 이는 `pay_complete`의 이벤트 객체에 담겨있습니다. 따라서 추후 취소 버튼 등을 구현하기 위해서는 `paymentId`를 반드시 보관해야합니다.
-    * 참고 - 네이버페이 결제취소 API : https://developer.pay.naver.com/docs/api/payments#payments_cancel
-  * 챗봇API에서는 별도로 결제취소를 위한 API를 지원하지 않습니다.
+네이버페이 결제 승인 진행 여부는 챗봇이 결정합니다. 챗봇은 상품의 재고 여부나 판매 가능 여부에 따라 결제 승인을 진행할지 결정해 `pay_complete` 이벤트에 대한 HTTP 응답으로 전달합니다
+  * 항상 `200 OK` 응답으로 결제 승인을 처리하면 재고가 없는 상품에 대한 주문이 발생할 수 있으므로 주의해야 합니다.
+  * 품절된 상품의 결제 승인을 거부하려면 `400`이나 `404`와 같은 오류 HTTP 상태 코드로 `pay_complete` 이벤트에 응답해야 합니다.
 
-### [예제1] 결제 처리하기
+챗봇은 네이버페이 결제 승인 후 `pay_confirm` 이벤트를 수신합니다. 이 이벤트를 활용해 결제 완료 후 트리거될 로직을 구현할 수 있습니다.(예: 결제 후 예약/구매)<br>
+
+이미 승인된 결제 건의 취소는 다음의 두 가지 방법으로 할 수 있습니다.
+ * 네이버페이센터의 **결제 내역 관리**에서 취소할 수 있습니다.
+ * 네이버페이 결제 취소 API를 사용해 취소할 수 있습니다. `paymentId`를 호출 파라미터로 사용하며, 이는 `pay_complete`의 이벤트 객체에 담겨 있습니다. 따라서 추후 취소 버튼 등을 구현하려면 `paymentId`를 반드시 보관해야 합니다.
+    * 네이버페이 결제 취소 API: https://developer.pay.naver.com/docs/api/payments#payments_cancel<br>
+
+> **참고**
+>
+> 챗봇 API에서는 별도로 결제 취소를 위한 API를 지원하지 않습니다.
+
+### [예제] 결제 처리하기
 
 ```javascript
 let express = reuiqre('express');
@@ -231,9 +239,9 @@ app.use(require('body-parser').json());
 app.post('/', (req, res) => {
     // 네이버페이 결제창에서 결제가 완료되어 이벤트가 발생
     if (req.body.event == 'pay_complete') {
-        // 상품의 재고여부를 확인하여 결제승인을 결정한다.
+        // 상품의 재고 여부를 확인하여 결제 승인을 결정한다.
         if (hasStock(req.body.options.paymentResult.merchantPayKey)) {
-            res.status(200); // 응답본문을 전달할 필요가 없다.
+            res.status(200); // 응답 본문을 전달할 필요가 없다.
         } else {
             res.status(404).json({
                 "event": "send",
@@ -256,7 +264,7 @@ app.post('/', (req, res) => {
 	   res.json({
 	        "event": "send",
 	        "textContent": {
-	            "text": result.message // 네이버페이 간편결제 결제승인 오류메시지를 그대로 사용(ex: 잔액부족)
+	            "text": result.message // 네이버페이 간편결제 결제 승인 오류 메시지를 그대로 사용(예: 잔액 부족)
  	        }
             });
 	}
