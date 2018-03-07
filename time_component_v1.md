@@ -59,13 +59,13 @@
 ```
  * 위 이벤트 전송시 사용자 화면
  
-![image](/images/time-component-chat.png)
+![image](/images/time-component-chat.PNG)
 
  * button 클릭시 열리는 view
  
 [Mobile - webview]
 
-![image](/images/time-component-mobile.png)
+![image](/images/time-component-mobile.PNG)
 
 [PC - popup]
 
