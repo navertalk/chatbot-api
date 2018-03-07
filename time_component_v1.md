@@ -36,7 +36,7 @@
 > * `code`의 최대 길이는 1,000자 입니다.
 <br>
 
-#### `textContent -> quickReply -> button`에 적용한 예시
+#### `textContent -> quickReply -> buttonList[] -> button`에 적용한 예시
 ```javascript
 {
   "event": "send",
