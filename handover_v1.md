@@ -6,7 +6,7 @@
 
 ## 핸드오버 기능 활성화 
 
-핸드오버 기능을 활성화하려면 [네이버 톡톡 파트너센터](https://partner.talk.naver.com/)의 **챗봇 API > API 설정**에서 **핸드오버 API**를 **ON**으로 설정합니다.<br>
+핸드오버 기능을 활성화하려면 [네이버 톡톡 파트너센터](https://partner.talk.naver.com/)의 **개발자도구 > API 설정**에서 **핸드오버 API**를 **ON**으로 설정합니다.<br>
 ![composite_message](/images/handover-switch.png)
 
 ## 파트너센터와 연동해 챗봇과 파트너가 실시간으로 응대
