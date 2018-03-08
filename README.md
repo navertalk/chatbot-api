@@ -138,7 +138,7 @@ curl -X POST -H "Content-Type: application/json;charset=UTF-8" -d '{ "event": "t
 <br>
 
 #### 3. URL을 등록합니다.
-* **파트너센터 > 챗봇 API > API 설정**에서 **Webhook** 영역의 **이벤트 받을 URL**에 위에서 만든 URL을 등록합니다.
+* **파트너센터 > 개발자도구 > 챗봇API 설정**에서 **Webhook** 영역의 **이벤트 받을 URL**에 위에서 만든 URL을 등록합니다.
 <br>
 
 #### 4. 연동이 완료되어 톡톡으로부터 이벤트를 수신합니다.
@@ -503,7 +503,7 @@ Content-Type: application/json;charset=UTF-8
 
 ### `echo` 이벤트 
 `echo` 이벤트는 [파트너센터](https://partner.talk.naver.com/)에서 상담사가 사용자에게 보낸 메시지와 챗봇이 사용자에게 보낸 메시지를 수신하는 이벤트입니다. 이벤트명은 `echo`이며 사용자에게 보내고자 했던 원본 이벤트는 `echoedEvent` 속성에 담기게 됩니다.<br>
-`echo` 이벤트를 수신하려면 **챗봇 API > API 설정 > Event선택**을 클릭하고 **echo**를 활성화합니다.
+`echo` 이벤트를 수신하려면 **개발자도구> API 설정 > Event선택**을 클릭하고 **echo**를 활성화합니다.
 <br>
 
 #### `echo` 이벤트 구조 
