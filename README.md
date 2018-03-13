@@ -35,7 +35,7 @@
   * [Pay API V1](/pay_api_v1.md)
   * [Image Upload API V1](/imageupload_api_v1.md)
   * [Handover API V1](/handover_v1.md)
-* UI 컴포넌트
+* [UI 컴포넌트](/ui_component_v1.md)
   * [TIME 컴포넌트](/time_component_v1.md)
 <br>
 <br>
