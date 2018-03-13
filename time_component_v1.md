@@ -1,19 +1,8 @@
-# **UI 컴포넌트**
-* UI 컴포넌트는 사용자에게 날짜, 시간 등을 간편하게 입력하기 위해 제공되는 도구입니다.
-* mobile에서는 webview로, pc에서는 popup으로 열립니다.
-
-<br>
-
 # **TIME 컴포넌트** 
 
 ## 개요
 * `TIME` 컴포넌트는 시간을 입력하는 UI 컴포넌트입니다. `TIME` 컴포넌트를 사용하면 사용자가 키보드를 사용하지 않고 간편하게 시간을 입력할 수 있으며, 챗봇에게는 시간 데이터가 일정한 형식으로 전달되므로 처리가 수월해집니다.
-* `send` 이벤트의 여러 `content` 중 [`button`](/README.md#button-object)요소에는 모두 적용할 수 있습니다.
-* `button` 요소 사용이 가능한 부분은 아래와 같습니다. 
-  * `compositeContent -> elementList -> button`
-  * `compositeContent -> buttonList[] -> button`
-  * `compositeContent -> buttonList[] -> button("type": "OPTION") -> buttonList[] -> button`
-  * `compositeContent/textContent/imageContent -> quickReply -> button`
+* 아래 이벤트 명세는 [`button`](/README.md#button-object) 요소에서의 컴포넌트 작성 방법을 설명 합니다. `button`이 사용 가능한 위치는 [UI 컴포넌트](/ui_component_v1.md)를 참고해주세요. 
 
 ## 이벤트 명세서
 ```javascript
@@ -28,7 +17,7 @@
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
-| `title` | string | N | 버튼과 컴포넌트 타이틀에 노출되는 텍스트, 기본값 '시간 전송하기'
+| `title` | string | N | 버튼과 컴포넌트 타이틀에 노출되는 텍스트, 기본값 '시간 선택하기'
 | `code` | string | N | 컴포넌트의 확인 버튼 클릭시 챗봇에게 전송되는 코드 |
 
 > **[주의사항]**
@@ -36,7 +25,7 @@
 > * `code`의 최대 길이는 1,000자 입니다.
 <br>
 
-#### `textContent -> quickReply -> button`에 적용한 예시
+#### `textContent -> quickReply -> buttonList[] -> button`에 적용한 예시
 ```javascript
 {
   "event": "send",
@@ -59,13 +48,13 @@
 ```
  * 위 이벤트 전송시 사용자 화면
  
-![image](/images/time-component-chat.jpg)
+![image](/images/time-component-chat.PNG)
 
  * button 클릭시 열리는 view
  
 [Mobile - webview]
 
-![image](/images/time-component-mobile.png)
+![image](/images/time-component-mobile.PNG)
 
 [PC - popup]
 
