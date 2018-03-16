@@ -29,7 +29,8 @@
 
 | key | Type | 필수 | 설명 |
 |:---:|:----:|:----:|------|
-| `title` | string | N | 버튼과 컴포넌트 타이틀에 노출되는 텍스트, 기본값은 '날짜 선택하기'
+| `type` | string | Y | `CALENDAR` 고정값 |
+| `title` | string | N | 버튼과 컴포넌트 타이틀에 노출되는 텍스트, 기본값은 '날짜 선택하기'|
 | `code` | string | N | 컴포넌트의 확인 버튼 클릭시 챗봇에게 전송되는 코드 |
 | `options` | object | N | 컴포넌트의 추가 옵션 정보, 사용시 key는 `calendar` |
 | `placeholder` | string | N | 날짜 표시란에 초기에 보여지는 텍스트, 기본값은 '날짜를 선택해주세요.' |
