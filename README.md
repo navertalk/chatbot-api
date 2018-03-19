@@ -38,6 +38,7 @@
 * [UI 컴포넌트](/ui_component_v1.md)
   * [TIME 컴포넌트](/time_component_v1.md)
   * [CALENDAR 컴포넌트](/calendar_component_v1.md)
+  * [TIME-INTERVAL 컴포넌트](/time-interval-component.md)
 <br>
 <br>
 
