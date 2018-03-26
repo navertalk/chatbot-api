@@ -59,7 +59,7 @@
         "title": "톡톡 레스토랑",
         "description": "파스타가 맛있는집",
         "image": {
-          "imageUrl": "https://search.pstatic.net/common/?autoRotate=true&quality=95&src=http%3A%2F%2Fldb.phinf.naver.net%2F20171212_39%2F1513070642332Sre4X_JPEG%2FlLWrszsMNIW4RLx5R_or39IB.JPG.jpg&type=m1000_692"
+          "imageUrl": "http://ldb.phinf.naver.net/20171212_39/1513070642332Sre4X_JPEG/lLWrszsMNIW4RLx5R_or39IB.JPG.jpg"
         },
         "buttonList": [
           {
@@ -122,7 +122,7 @@
         "title": "톡톡 펜션",
         "description": "스위트 디럭스",
         "image": {
-          "imageUrl": "https://ssl.phinf.net/naverbooking/20180309_45/1520573251611uJEvu_JPEG/fd120edc23805aa842b2a228596595cb.jpg?type=w1500"
+          "imageUrl": "https://ssl.phinf.net/naverbooking/20180309_45/1520573251611uJEvu_JPEG/fd120edc23805aa842b2a228596595cb.jpg"
         },
         "buttonList": [
           {
