@@ -37,13 +37,16 @@
 | `start` | string | N | 선택 가능 기간 설정시 시작 날짜값 (YYYYMMDD) |
 | `end` | string | N | 선택 가능 기간 설정시 종료 날짜값 (YYYYMMDD) |
 | `disables` | string | N | 선택 가능 기간내에서 불가능한 날을 지정. 요일(0\~6까지의 숫자,일요일\~토요일에 해당함), 단일날짜(YYYYMMDD), 기간(YYYYMMDD-YYYYMMDD)을 콤마(,)로 연결, 복수개 나열 가능 |
+| `isRange` | boolean | N | 연속 날짜 선택 여부, 기본값은 false |
 
 > **[주의사항]**
 > * `title`의 최대 길이는 18자 입니다.
 > * `code`의 최대 길이는 1,000자 입니다.
 > * 선택 가능 기간을 설정하실 때에는 `start`,`end` 두 값이 필수입니다. 하나만 입력시에는 무시됩니다. 
+> * 연속 날짜 선택 설정시(isRange : true) 선택 불가능한 날짜(disables)를 연속 날짜 안에 포함하여 선택하면, 경고문을 보여주고 선택이 해제 됩니다.
 <br>
 
+### 1) 단일 날짜
 #### `compositeContent -> compositeList -> buttonList[] -> button`에 적용한 예시
 ```javascript
 {
@@ -100,6 +103,70 @@
   "user": "al-2eGuGr5WQOnco1_V-FQ",
   "textContent": {
     "text": "20180320",
+    "code": "code_for_your_bot",
+    "inputType": "calendar"
+  }
+}
+```
+
+### 2) 연속 날짜
+#### `compositeContent -> compositeList -> buttonList[] -> button`에 적용한 예시
+```javascript
+{
+  "event": "send",
+  "user": "al-2eGuGr5WQOnco1_V-FQ",
+  "compositeContent": {
+    "compositeList": [
+      {
+        "title": "톡톡 펜션",
+        "description": "스위트 디럭스",
+        "image": {
+          "imageUrl": "https://ssl.phinf.net/naverbooking/20180309_45/1520573251611uJEvu_JPEG/fd120edc23805aa842b2a228596595cb.jpg?type=w1500"
+        },
+        "buttonList": [
+          {
+            "type": "CALENDAR",
+            "data": {
+              "title": "펜션 예약하기",
+              "code": "code_for_your_bot",
+              "options": {
+                "calendar": {
+                  "placeholder": "입실/퇴실일을 선택하세요.",
+                  "start": "20180301",
+                  "end": "20180430",
+                  "disables": "1,20180309,20180315-20180316",
+                  "isRange" : true
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+ * 위 이벤트 전송시 사용자 화면
+ 
+![image](/images/calendar-component2-chat.png)
+
+ * button 클릭시 열리는 view
+ 
+[Mobile - webview] (날짜 선택 후)
+
+![image](/images/calendar-component2.png)
+
+[PC - popup] - 모바일과 동일한 화면이 팝업으로 열립니다.
+
+ * 컴포넌트에서 3월 29일 ~ 4월 1일을 선택하고 `확인` 클릭시
+   * 사용자 화면에는 `2018. 3. 29.(목) ~ 2018. 4. 1(일)` 텍스트가 노출됩니다.
+   * 챗봇에 전송 되는 데이터는 아래와 같습니다.
+ ```javascript
+ {
+  "event": "send",
+  "user": "al-2eGuGr5WQOnco1_V-FQ",
+  "textContent": {
+    "text": "20180329-20180401",
     "code": "code_for_your_bot",
     "inputType": "calendar"
   }
