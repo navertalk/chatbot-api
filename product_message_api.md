@@ -32,3 +32,65 @@
   "user": "zejoVy3F9c98gvc-v6PFlQ"
 }
 ```
+## 챗봇에서 구성 가능한 커스텀 버튼
+```json
+{
+  "event": "product",
+  "options": {
+    "ids": [
+      2000344432,
+      2000344433,
+      2000344434,
+      2000344437
+    ],
+    "displayType": "single",
+    // 퀵 리플라이 버튼은 메시지별 구성이 불가능하고, 대화의 제일 아래 쪽에 위치합니다. 기존 퀵 리플라이 버튼과 동일한 기능입니다.
+    "quickReply": {
+      "buttonList": [
+        {
+          "data": {
+            "title": "퀵 다이알로그",
+            "code": "DIALOGUE"
+          },
+          "type": "TEXT"
+        },
+        {
+          "data": {
+            "title": "퀵 베이직",
+            "code": "BASIC"
+          },
+          "type": "TEXT"
+        }
+      ]
+    },
+    // 커스텀 버튼은 특정 상품 컴포짓에 덧붙일 수 있습니다.
+    "customButtonList": [
+      {
+        "id": 2000344432,
+        "buttonList": [
+          {
+            "type": "TEXT",
+            "data": {
+              "title": "텍스트형 버튼",
+              "code": "code1"
+            }
+          }
+        ]
+      },
+      {
+        "id": 2000344433,
+        "buttonList": [
+          {
+            "type": "TEXT",
+            "data": {
+              "title": "텍스트형 버튼",
+              "code": "code2"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "user": "zejoVy3F9c98gvc-v6PFlQ"
+}
+```
