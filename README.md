@@ -93,6 +93,7 @@ Chat Bot API를 이용하려면 먼저 챗봇용 파트너 계정을 생성해�
 ### **[STEP 1]** 네이버 톡톡으로부터 이벤트 받기
 
 #### 1. 네이버 톡톡으로부터 이벤트를 받기 위해 간단한 코드를 작성합니다.
+##### 예제 코드
 [`node.js` 샘플]
 ```javascript
 const express = require('express');
