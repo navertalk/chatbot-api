@@ -133,6 +133,15 @@ public class BotApplication {
 ```
 <br>
 
+[`php` 샘플]
+```php
+<?php
+$json_str = file_get_contents('php://input');
+$json_obj = json_decode($json_str);
+print_r($json_obj);
+```
+<br>
+
 #### 2. localhost에서 접근 테스트를 합니다.
 ```bash
 curl -X POST -H "Content-Type: application/json;charset=UTF-8" -d '{ "event": "test" }' "http://localhost:8080/"
