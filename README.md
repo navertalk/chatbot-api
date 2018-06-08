@@ -767,9 +767,9 @@ Content-Type: application/json;charset=UTF-8
   * inquiry: 오른쪽 위의 상담 요청 레이어에서 `상담 요청하기` 버튼을 누른 경우입니다.
   * vphone: 스티커 버튼의 오른쪽에 위치한 `안심전화번호로 상담요청하기` 버튼을 누른 경우입니다. 안심전화번호와 해당 전화번호의 유효기간(yyyy-MM-dd 형태)이 제공됩니다.
     * 예: {"text":"050719003814,2017-11-03", "inputType":"vphone"}
-  * product: 스마트스토어/쇼핑윈도의 상품 페이지에서 `톡톡문의`로 채팅을 시작하거나, 톡톡 모바일 페이지 위젯 중 `다른상품문의`를 실행한 경우입니다. options 속성에 product 정보를 포함하고 있습니다. `톡톡문의`로 유입시에는 typing 등, 사용자의 추가 액션이 있어야 이 `textContent`가 함께 전송됩니다. 
+  * product: 스마트스토어/쇼핑윈도의 상품 페이지에서 `톡톡문의`로 채팅을 시작하거나, 톡톡 모바일 페이지 위젯 중 `다른상품문의`를 실행한 경우입니다. options 속성에 product 정보를 포함하고 있습니다. `톡톡문의`로 유입시에는 typing 등, 사용자의 추가 액션이 있어야 이 textContent가 함께 전송됩니다. 
   
-  [`inputType: product`인 경우의 `event` 예시]
+  [`inputType`: `product`인 경우의 이벤트 예시]
 ```javascript
 {
   "event": "send",
