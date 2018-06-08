@@ -770,27 +770,27 @@ Content-Type: application/json;charset=UTF-8
   * product: 스마트스토어/쇼핑윈도의 상품 페이지에서 `톡톡문의`로 채팅을 시작하거나, 톡톡 모바일 페이지 위젯 중 `다른상품문의`를 실행한 경우입니다. options 속성에 product 정보를 포함하고 있습니다. `톡톡문의`로 유입시에는 typing 등, 사용자의 추가 액션이 있어야 이 textContent가 함께 전송됩니다. 
   
   [`inputType`: `product`인 경우의 이벤트 예시]
-```javascript
-{
-  "event": "send",
-  "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "textContent": {
-    "text": "이 상품을 문의합니다.",
-    "inputType": "product"
-  },
-  "options": {
-    "product": {
-      "name": "[중고]200개의 단계별 예제로 배우는 안드로이드 4.0",
-      "url": "http://smartstore.naver.com/inflow/outlink/product?p=309672359&tr=tsf&site_preference=device",
-      "mobileUrl": "http://m.smartstore.naver.com/inflow/outlink/product?p=309672359&tr=tsf&site_preference=device",
-      "thumbUrl": "https://shop-phinf.pstatic.net/20150716_65/pqbdo_1437051783074LGw89_JPEG/43672814967807467_-164086553.jpg?type=f344",
-      "currencyPrice": "19,900원",
-      "currencyMobilePrice": "19,900원"
-    },
-    "mobile": false
-  }
-}
-```
+	```javascript
+	{
+	  "event": "send",
+	  "user": "al-2eGuGr5WQOnco1_V-FQ",
+	  "textContent": {
+	    "text": "이 상품을 문의합니다.",
+	    "inputType": "product"
+	  },
+	  "options": {
+	    "product": {
+	      "name": "[중고]200개의 단계별 예제로 배우는 안드로이드 4.0",
+	      "url": "http://smartstore.naver.com/inflow/outlink/product?p=309672359&tr=tsf&site_preference=device",
+	      "mobileUrl": "http://m.smartstore.naver.com/inflow/outlink/product?p=309672359&tr=tsf&site_preference=device",
+	      "thumbUrl": "https://shop-phinf.pstatic.net/20150716_65/pqbdo_1437051783074LGw89_JPEG/43672814967807467_-164086553.jpg?type=f344",
+	      "currencyPrice": "19,900원",
+	      "currencyMobilePrice": "19,900원"
+	    },
+	    "mobile": false
+	  }
+	}
+	```
 <br>
 
 ### `imageContent`
