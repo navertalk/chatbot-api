@@ -396,7 +396,8 @@ Content-Type: application/json;charset=UTF-8
         "from": "309672359",
         "friend": false, /* false: 친구 아님,  true: 친구 */
         "under14": false, /* false: 만14세 이상,  true: 만14세 미만 */
-        "under19": false /* false: 만19세 이상,  true: 만19세 미만 */
+        "under19": false, /* false: 만19세 이상,  true: 만19세 미만 */
+	"unreadMessage": true /* 파트너나 챗봇이 보낸 메시지 중 읽지 않은 메시지 존재 여부, false: 읽지 않은 메시지 있음, true: 읽지 않은 메시지 없음 */
     },
     "user": "al-2eGuGr5WQOnco1_V-FQ" /* 사용자 식별값 */
 }
