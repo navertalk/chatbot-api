@@ -748,7 +748,7 @@ Content-Type: application/json;charset=UTF-8
     "textContent": {
         "text": "안녕하세요? 도미노 피자 주문 챗봇입니다. 6가지 인기 메뉴를 빠르게 주문해 보세요!", /* 채팅창에 노출할 텍스트 */
         "code": "", /* compositeContent에서 버튼 클릭 시 전달받는 코드값, code는 채팅에 노출되지 않습니다. */
-        "inputType": "typing|button|sticker|inquiry|vphone" /* 수신 시에만 받는 속성으로, 사용자가 어떤 매개체로 봇에게 입력하는지를 나타내는 값입니다. */
+        "inputType": "typing|button|sticker|vphone" /* 수신 시에만 받는 속성으로, 사용자가 어떤 매개체로 봇에게 입력하는지를 나타내는 값입니다. */
     }
 }
 ```
@@ -765,7 +765,6 @@ Content-Type: application/json;charset=UTF-8
   * typing: 사용자가 직접 입력창에 적고 `보내기` 버튼을 눌러 보낸 경우입니다.
   * button: 봇에서 보낸 여러 형태의 버튼을 직접 눌러서 응답한 경우입니다. `code`값이 같이 포함됩니다.
   * sticker: 스티커를 눌러서 전송한 경우입니다. 사용자가 스티커를 눌렀을 때 응답할 수 있습니다.
-  * inquiry: 오른쪽 위의 상담 요청 레이어에서 `상담 요청하기` 버튼을 누른 경우입니다.
   * vphone: 스티커 버튼의 오른쪽에 위치한 `안심전화번호로 상담요청하기` 버튼을 누른 경우입니다. 안심전화번호와 해당 전화번호의 유효기간(yyyy-MM-dd 형태)이 제공됩니다.
     * 예: {"text":"050719003814,2017-11-03", "inputType":"vphone"}
   * product: 스마트스토어/쇼핑윈도의 상품 페이지에서 `톡톡문의`로 채팅을 시작하거나, 톡톡 모바일 페이지 위젯 중 `다른상품문의`를 실행한 경우입니다. options 속성에 product 정보를 포함하고 있습니다. `톡톡문의`로 유입시에는 typing 등, 사용자의 추가 액션이 있어야 이 textContent가 함께 전송됩니다. 
