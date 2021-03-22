@@ -133,19 +133,6 @@
   }
 }
 ```
- 
-**상담 완료하기** 버튼을 누르지 않고 대화가 '자동 완료'되는 시점에는 다음과 같이 전송됩니다.
-```json
-{
-  "event": "handover",
-  "user": "al-2eGuGr5WQOnco1_V-FQ",
-  "partner": "wc1234",
-  "options": {
-    "control": "passThread",
-    "metadata": "{\"autoEnd\":true}"
-  }
-}
-```
 
 ## 챗봇에서 대화의 주도권 가져오기
  
