@@ -1,5 +1,13 @@
 # **Profile API** V1
 
+### 업데이트 (2025.05.22.)
+
+#### 철회 이벤트 추가
+
+네이버 톡톡에선 챗봇과 연동된 프로필 제공 내역을 조회할 수 있는 페이지를 제공하며 사용자가 이를 철회하는 경우, 해당 정보를 챗봇에 전달하여 정보제공동의 내역이 철회됐음을 알립니다.
+
+따라서 챗봇에선 만약 사용자 정보를 저장하고 있었다면 반드시 삭제해야 합니다. 
+
 ### 업데이트 (2018.11.26.)
 
 #### 휴대전화번호, 주소 데이터 관리 주체 변경
@@ -125,3 +133,23 @@ Content-Type: application/json;charset=UTF-8
 }
 ```
 <br>
+
+## 이벤트 철회
+
+### 회원 정보 동의 철회 명세(네이버 톡톡 → 챗봇)
+
+유저가 https://bot.talk.naver.com/front/page/chatBotLink 페이지에서 개인정보 제공 동의 철회 시 아래와 같이 `WITHDRAW` 이벤트가 전달됩니다.
+`withdrawals`에 프로필 유형(`nickname`, `cellphone`, `address`)이 나열됩니다.
+
+```json
+{
+  "event": "profile",
+  "user": "al-2eGuGr5WQOnco1_V-FQ",
+  "options": {
+    "result": "WITHDRAW",
+    "withdrawals": [
+      "nickname"
+    ]
+  }
+} 
+```
